@@ -6,11 +6,15 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 17:22:00 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 17:32:35 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:07:31 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** RETURN: 0 if the character is not a digit
+*/
 
 int	ft_isdigit(int c)
 {

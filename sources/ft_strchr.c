@@ -6,14 +6,18 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:55:09 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 19:39:11 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:19:35 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: the pointer is not protected in the original function
+** /!\ the pointer is not protected if NULL in the original function
+**
+** note: use ft_strrchr if you want to search from the end
+**
+** RETURN: the location of character c in the string, else NULL pointer
 */
 
 char	*ft_strchr(const char *s , int c)

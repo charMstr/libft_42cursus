@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 18:30:29 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 18:09:59 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/09 14:32:37 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/09 18:27:50 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 /*
-** RETURN: 0 if the character is not printable
+** ARGS: the number of elements (+/- '\0' if strings..), then sizeof(*...)
+**
+** RETURN: pointer NULL if failed --> always test when calling this function
 */
 
-int ft_isprint(int c)
+void	*ft_calloc(size_t count , size_t size)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
+	void *ptr;
+	size_t i;
+
+	i = 0;
+	if (!(ptr = (void *)malloc(count * size)))
+			return (NULL);
 	else
-		return (0);
+		while (i < size * count)
+		{
+			*((unsigned char *)ptr + i) = 0;
+			i++;
+		}
+		return (ptr);
 }

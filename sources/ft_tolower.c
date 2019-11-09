@@ -6,11 +6,16 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:49:05 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 18:54:48 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:12:24 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** RETURN: the equivalent lowercase ascii equivalent if it exists, otherwise
+** the arg is returned unchanged
+*/
 
 int ft_tolower(int c)
 {

@@ -6,11 +6,17 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 22:09:21 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 23:30:53 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/09 19:18:53 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** /!\ do not use unless you dig the man... do not use
+**
+** note: use ft_strjoin instead
+*/
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

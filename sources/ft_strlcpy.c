@@ -6,15 +6,19 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 20:16:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 21:54:07 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/09 19:26:15 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** returns the length of the string it tried to create,i therefore: strlen(src)
-** note: undefined behavior if strings overlap
+** /!\ undefined behavior if strings overlap
+** /!\ original function not protected against a NULL pointer argument
+**
+** note: use instead ft_strdup: it will creat the pointer and malloc it for you
+**
+** RETURN: the length of the string it tried to create, therefore: strlen(src)
 */
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
