@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 00:04:30 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 00:50:44 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char		**ft_split(char const *s, char c)
 	char **ptr_array;
 	int i;
 	int k;
-	int len_str;
 
 	i = 0;
 	k = 0;
@@ -82,10 +81,10 @@ char		**ft_split(char const *s, char c)
 	ptr_array[size_array(s, c)] = NULL;
 	while (ptr_array[k])
 	{
-		len_str = find_end(s, c, i) - find_start(s , c, i);
-		if (!(ptr_array[k] = (char *)malloc(sizeof(char) * len_str)))
+		ptr_array[k] = ft_substr(s, find_start(s, c, i), find_end(s, c, i) \
+				- find_start(s, c, i));
+		if(!(ptr_array[k]))
 			return (free_nested(ptr_array, k));
-		ptr_array[k] = ft_substr(s, find_start(s, c, i), len_str);
 		i = find_end(s, c, i) + 1;
 		k++;
 	}
