@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 19:26:40 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 21:22:29 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:47:15 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char		*ft_strtrim(char const *s1, char const *set)
 	return (ptr);
 }
 
-int			main(int argc, char *argv[])
+int			main()
 {
 	char *str1 = "\t\t xoxohey xoxo how are you?  x o";
 	char *set = " \txo";
@@ -87,6 +87,8 @@ int			main(int argc, char *argv[])
 
 	printf("%s\n", str1);
 	res = ft_strtrim(str1, "");
+	res = ft_strtrim(str1, set);
+
 	printf("%s\n", res);
 	return (0);
 }

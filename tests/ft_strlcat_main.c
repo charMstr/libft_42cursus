@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 22:09:21 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 23:28:13 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:45:02 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	main(int argc, char *argv[])
 	char *dst1;
 	char *dst2;
 	char *src = "RAJ";
-	int i;
 
 	if (!(dst1 = (char *)malloc(sizeof(char) * 30)))
 		return (0);

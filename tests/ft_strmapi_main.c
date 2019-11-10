@@ -6,11 +6,12 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 00:23:14 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 13:54:57 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 13:53:07 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 /*
 ** note: use malloc
@@ -37,4 +38,20 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	ptr[i] = '\0';
 	return (ptr);
+}
+
+char test_func(unsigned int i, char c)
+{
+	if (i % 2 == 0)
+		return (ft_toupper(c));
+	else
+		return (c);
+}
+
+int	main(int argc, char *argv[])
+{
+	char *string = "hey salut ca va?";
+
+	printf("%s\n", ft_strmapi(string, &test_func));
+	return (0);
 }

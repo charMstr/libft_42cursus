@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 00:23:14 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 13:54:57 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/10 14:19:17 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/10 15:26:35 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: use malloc
+** note: usefull for error messages: 1 --> stdout		2 --> stderr
 **
-** RETURN: after an iteration of f() on each char --> a malloced string or NULL
+** note2: if fd was not valid, message is redirected to stderr
 */
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*ptr;
-	size_t	len;
-	size_t	i;
-
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	if (!(ptr = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		*(ptr + i) = (*f)((unsigned int)i, s[i]);
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	if (!s)
+		return ;
+	if (write(fd, s, ft_strlen(s)) == -1)
+		write(2, s, ft_strlen(s));
 }

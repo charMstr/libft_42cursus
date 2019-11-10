@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:55:09 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 19:39:00 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:34:12 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_strchr(const char *s , int c)
 int	main(int argc, char *argv[])
 {
 	char *str = "heya salut a tous!!";
-	char *res;
 	int i;
 
 	i = 0;

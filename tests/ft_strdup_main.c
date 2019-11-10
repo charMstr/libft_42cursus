@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 16:46:48 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 16:57:21 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:41:22 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-int	main(int argc, char *argv[])
+int	main()
 {
 	char *string = "hey boyz how are you doing?";
 	char *string2;

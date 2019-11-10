@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 00:23:14 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 13:54:57 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/10 18:33:16 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/10 18:41:55 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 /*
-** note: use malloc
+** note: take as first parameter the address of an existing link, or a pointer
+** to a linked list (therefore a t_list ** pointer)
 **
-** RETURN: after an iteration of f() on each char --> a malloced string or NULL
 */
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_lstadd_front(t_list **alst, t_list *new)
 {
-	char	*ptr;
-	size_t	len;
-	size_t	i;
+	t_list *new;
+	void	*tmp;
 
-	if (!s || !f)
+	if (!alst)
 		return (NULL);
-	len = ft_strlen(s);
-	if (!(ptr = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		*(ptr + i) = (*f)((unsigned int)i, s[i]);
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+
 }

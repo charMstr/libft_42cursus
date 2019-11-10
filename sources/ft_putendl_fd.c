@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 00:23:14 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 13:54:57 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/10 14:56:17 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/10 15:18:00 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: use malloc
+** note: if fd is not valid, then the message is redirected on stderr (fd = 2)
 **
-** RETURN: after an iteration of f() on each char --> a malloced string or NULL
+** adds a '\n' after a putstr
 */
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	*ptr;
-	size_t	len;
-	size_t	i;
+	char c;
 
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	if (!(ptr = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = 0;
-	while (i < len)
+	c = '\n';
+	if (!s)
+		return ;
+	if (write(fd, s, ft_strlen(s)) == -1)
 	{
-		*(ptr + i) = (*f)((unsigned int)i, s[i]);
-		i++;
+		write(2, s, ft_strlen(s));
+		write(2, &c, 1);
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	else
+		write(fd, &c, 1);
 }

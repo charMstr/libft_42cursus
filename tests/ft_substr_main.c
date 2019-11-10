@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 16:58:49 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 20:59:24 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:49:01 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-int	main(int argc, char *argv[])
+int	main()
 {
 	char *str1 = "0123456789HowYouDoing?";
 	char *result;

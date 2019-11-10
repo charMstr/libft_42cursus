@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 15:48:43 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 16:41:55 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/10 17:29:03 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 int	main(int argc, char *argv[])
 {
 	char *string = "salut les copains!?";
-	char *string2 = NULL;
 	char *res1;
 	char *res2;
 

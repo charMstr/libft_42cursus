@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 00:23:14 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 13:54:57 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/08 17:01:24 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/09 18:17:00 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: use malloc
+** /!\ the original function doesnt protect its arg against NULL pointers
 **
-** RETURN: after an iteration of f() on each char --> a malloced string or NULL
+** RETURN: numbers of characters without the final '\0'
 */
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+size_t	ft_strlen(const char *s)
 {
-	char	*ptr;
-	size_t	len;
-	size_t	i;
+	size_t i;
 
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	if (!(ptr = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
 	i = 0;
-	while (i < len)
-	{
-		*(ptr + i) = (*f)((unsigned int)i, s[i]);
+	while (s[i])
 		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (i);
 }
