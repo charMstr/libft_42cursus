@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 18:30:29 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 21:10:18 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/11 14:47:23 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/11 15:02:40 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** RETURN: 0 if the character is not printable
+** RETURN: pointer to very last link, NULL if the head of list pointer was NULL
 */
 
-int	ft_isprint(int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	t_list *previous;
+
+	previous = NULL;
+	while (lst != NULL)
+	{
+		previous = lst;
+		lst = lst->next;
+	}
+	return (previous);
 }

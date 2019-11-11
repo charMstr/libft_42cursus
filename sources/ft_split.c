@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 00:50:33 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/11 21:07:18 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static void	*free_nested(char **ptr, int k)
 
 char		**ft_split(char const *s, char c)
 {
-	char **ptr_array;
-	int i;
-	int k;
+	char	**ptr_array;
+	int		i;
+	int		k;
 
 	i = 0;
 	k = 0;
@@ -82,7 +82,7 @@ char		**ft_split(char const *s, char c)
 	{
 		ptr_array[k] = ft_substr(s, find_start(s, c, i), find_end(s, c, i) \
 				- find_start(s, c, i));
-		if(!(ptr_array[k]))
+		if (!(ptr_array[k]))
 			return (free_nested(ptr_array, k));
 		i = find_end(s, c, i) + 1;
 		k++;

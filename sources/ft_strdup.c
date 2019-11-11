@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 16:46:48 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 18:30:07 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/11 21:07:52 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 char	*ft_strdup(const char *s1)
 {
-	size_t i;
-	size_t len;
-	char *ptr;
+	size_t	i;
+	size_t	len;
+	char	*ptr;
 
 	i = 0;
 	len = ft_strlen(s1);

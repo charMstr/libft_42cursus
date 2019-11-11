@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 20:04:32 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/04 20:06:39 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/11 19:02:31 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/11 19:46:10 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *str)
-{
-	int i;
+/*
+** note: iteration of f function on every CONTENTS of every links of the list
+*/
 
-	i = 0;
-	while (str[i])
-		i++;
-	write(1, str, i);
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!(*f))
+		return ;
+	while (lst)
+	{
+		if (!(lst->content == NULL))
+			(*f)(lst->content);
+		lst = lst->next;
+	}
 }

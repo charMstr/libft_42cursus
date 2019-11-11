@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 13:25:49 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 18:23:56 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/11 21:06:23 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-		size_t i;
-		size_t j;
+	size_t i;
+	size_t j;
 
-		i = 0;
-		if (!needle[0])
+	i = 0;
+	if (!needle[0])
+	{
+		return ((char *)haystack);
+	}
+	while (haystack[i] && (i < len))
+	{
+		j = 0;
+		if (haystack[i] == needle[j])
 		{
-			return ((char *)haystack);
+			while ((i + j < len) && haystack[i + j] && needle[j] \
+					&& *(haystack + i + j) == *(needle + j))
+				j++;
+			if (*(needle + j) == '\0')
+				return ((char *)(haystack + i));
 		}
-		while (haystack[i] && (i < len))
-		{
-			j = 0;
-			if (haystack[i] == needle[j])
-			{
-				while ((i + j < len) && haystack[i + j] && needle[j] \
-						&& *(haystack + i + j) == *(needle + j))
-					j++;
-				if (*(needle + j) == '\0')
-					return ((char *)(haystack + i));
-			}
-			i++;
-		}
-		return (NULL);
+		i++;
+	}
+	return (NULL);
 }

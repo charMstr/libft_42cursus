@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 18:30:29 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 21:10:18 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/11 15:02:30 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/11 15:47:52 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** RETURN: 0 if the character is not printable
+** note: arg1: head of list, (ex: &head)	arg2: new link to be added
+**
+** note2: if *alst is NULL, it means the list was empty. new list is created
 */
 
-int	ft_isprint(int c)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	t_list *tmp;
+	t_list *previous;
+
+	if (!alst || !new)
+		return ;
+	if (!(*alst))
+	{
+		*alst = new;
+		return ;
+	}
+	tmp = *alst;
+	previous = NULL;
+	while (tmp != NULL)
+	{
+		previous = tmp;
+		tmp = tmp->next;
+	}
+	previous->next = new;
 }

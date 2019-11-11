@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 18:30:29 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 21:10:18 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/11 14:26:57 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/11 14:39:30 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** RETURN: 0 if the character is not printable
+** note: arg = the head of the list
+**
+** RETURN: list's size		or		ZERO if pointer was NULL
 */
 
-int	ft_isprint(int c)
+int	ft_lstsize(t_list *lst)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	int i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

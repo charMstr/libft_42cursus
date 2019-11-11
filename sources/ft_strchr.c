@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:55:09 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 18:19:35 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/11 21:08:34 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** RETURN: the location of character c in the string, else NULL pointer
 */
 
-char	*ft_strchr(const char *s , int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int i;
 
