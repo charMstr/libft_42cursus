@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 20:16:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/12 16:10:06 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:13:39 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t i;
 	size_t src_len;
 
+	if (!src || !dst)
+		return (0);
 	src_len = ft_strlen(src);
 	i = 0;
 	if (!dstsize)

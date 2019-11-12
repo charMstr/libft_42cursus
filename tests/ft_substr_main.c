@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 16:58:49 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 17:49:01 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:52:24 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 	size_t	src_length;
 
+	if (!s)
+		return (NULL);
 	src_length = ft_strlen(s);
 	i = 0;
 	if (start >= src_length)

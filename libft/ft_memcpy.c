@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:44:56 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 18:03:25 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:49:17 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	size_t i;
 
 	i = 0;
+	if (n != 0 && !dst && !src)
+		return (dst);
 	while (i < n)
 	{
-		*((unsigned char *)dst + i) = *((unsigned char *)src + i);
+		*((unsigned char *)dst + i) = *((const unsigned char *)src + i);
 		i++;
 	}
 	return (dst);
