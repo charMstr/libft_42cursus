@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/11/12 00:29:21 by charmstr         ###   ########.fr        #
+#    Updated: 2019/11/12 17:50:12 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ OBJ = $(SRC:.c=.o)
 SRC_BONUS = $(addprefix $(OBJ_PATH)ft_,$(addsuffix .c, $(BONUS_FILES)))
 OBJ_BONUS =$(SRC_BONUS:.c=.o)
 
-all: $(OBJ_PATH) $(NAME)
+all: $(NAME)
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
@@ -96,17 +96,17 @@ $(NAME): $(OBJ) $(FT_H)
 	@echo "\t\t$(CREAT_FG)indexing Library  $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(RANLIB_BG)$(BLACK_FG) ranlib $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
 	@ranlib $@
 
-$(OBJ): $(OBJ_PATH)%.o: %.c
+$(OBJ): $(OBJ_PATH)%.o: %.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(OBJ_BONUS): $(OBJ_PATH)%.o : %.c
+$(OBJ_BONUS): $(OBJ_PATH)%.o : %.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 
-bonus: $(OBJ_PATH) $(OBJ_BONUS) $(OBJ) $(FT_H)
+bonus: $(OBJ_BONUS) $(OBJ) $(FT_H)
 	@echo "\t\t$(CREAT_FG)building Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(BONUS_BG)$(BLACK_FG) BONUSES $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
 
-	ar -rc $(NAME) $(OBJ) $(OBJ_BONUS) $(FT_H)
+	ar -rc $(NAME) $^
 
 	@echo "\t\t$(CREAT_FG)indexing Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(RANLIB_BG)$(BLACK_FG) ranlib $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
 	@ranlib $(NAME)
