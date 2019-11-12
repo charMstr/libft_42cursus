@@ -6,16 +6,22 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 22:09:21 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/09 19:18:53 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 14:33:08 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** /!\ do not use unless you dig the man... do not use
+** /!\ do not use
+** only does the job if the <dst> pointer is a string way shorter than its
+** allocated memory which is <dstsize>, so that there is enough space for <src>
+** string to be added if RETURN is bigger than <dstsize> then it means they
+** dont fit .
 **
 ** note: use ft_strjoin instead
+**
+** note2: ioriginal not protected against NULL inputs arguments
 */
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
@@ -33,7 +39,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	{
 		i++;
 	}
-	while (i < dstsize - 1)
+	while (i < dstsize - 1 && (i - len_dst) < len_src)
 	{
 		*(dst + i) = *(src + i - len_dst);
 		i++;

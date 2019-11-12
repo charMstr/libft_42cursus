@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 22:09:21 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 17:45:02 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 14:26:58 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	{
 		i++;
 	}
-	while (i < dstsize - 1)
+	while (i < dstsize - 1 && (i - len_dst) < len_src)
 	{
 		*(dst + i) = *(src + i - len_dst);
 		i++;
@@ -45,19 +45,31 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 int	main(int argc, char *argv[])
 {
-	char *dst1;
+	char *dst1 ;
 	char *dst2;
-	char *src = "RAJ";
 
-	if (!(dst1 = (char *)malloc(sizeof(char) * 30)))
+	if (argc != 2)
+	{
+		printf("failed to provide a src string as argument\n");
 		return (0);
-	if (!(dst2 = (char *)malloc(sizeof(char) * 30)))
+	}
+	char *src = argv[1];
+	if (!(dst1 = (char *)malloc(sizeof(char) * 15)))
 		return (0);
-	dst1 = strcpy(dst1, "salut!");
-	dst2 = strcpy(dst2, "salut!");
-	printf("strlcat    :%zu\n",strlcat(dst2, src, 4));//strlen(src) + strlen(dst2) + 1 ));
-	printf("dest2 is: \"%s\"\n", dst2);
-	printf("ft_strlcat :%zu\n",ft_strlcat(dst1, src, 4));//strlen(src) + strlen(dst1) + 1 ));
-	printf("dest1 is: \"%s\"\n", dst1);
+	if (!(dst2 = (char *)malloc(sizeof(char) * 15)))
+		return (0);
+	memset(dst1, 0, 15);
+	memset(dst1, 'r', 6);
+	memset(dst2, 0, 15);
+	memset(dst2, 'r', 6);
+
+	dst1[0] = '\0';
+	dst2[0] = '\0';
+	dst1[11] = 'a';
+	dst2[11] = 'a';
+	printf("strlcat    :%zu\n",strlcat(dst2, src, 15));
+	write(1, dst2, 15);
+	printf("\nft_strlcat :%zu\n",ft_strlcat(dst1, src, 15));
+	write(1, dst1, 15);
 	return (0);
 }

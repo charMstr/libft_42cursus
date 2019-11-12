@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 20:16:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/08 21:53:30 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:10:06 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
+	size_t src_len;
 
+	src_len = ft_strlen(src);
 	i = 0;
-	if (dstsize < 1)
-		return (ft_strlen(src));
-	while (i < (dstsize - 1))
+	if (!dstsize)
+		return (src_len);
+	while (i < (dstsize - 1) && i < src_len)
 	{
 		*(dst + i) = *(src + i);
 		i++;
@@ -38,36 +40,29 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 int	main(int argc, char *argv[])
 {
 	int i;
-	char *src = "hello world!";
+	char *src;
 	char *dst1;
 	char *dst2;
-	int len;
 
-	len = strlen(src);
-	if (!(dst1 = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
-	if (!(dst2 = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
-	dst1 = strcpy(dst1, "hey");
-	dst2 = strcpy(dst2, "hey");
-
-	printf("dst1 is :\"%s\"\n", dst1);
-	printf("dst2 is :\"%s\"\n", dst2);
-	printf("ft_strlcpy return:%lu\n",ft_strlcpy(dst1, src, 0));
-	printf("dst1 is now: \"%s\"\n", dst1);
-	printf("strlcpy return:%lu\n",strlcpy(dst2, src, 0));
-	printf("dst2 is now: \"%s\"\n", dst2);
-
-	i = 0;
-	while (i < len)
+	if (argc != 2)
 	{
-		ft_strlcpy(dst1, src, i);
-		strlcpy(dst2, src, i);
-		if (strcmp(dst1, dst2))
-		{
-			printf("failed to immitate the behavior of strlcpy function\n");
-		}
-		i++;
+		printf("failed to provide one arg: the src string\n");
+		return (0);
 	}
+	src = argv[1];
+	if (!(dst1 = (char *)malloc(sizeof(char) * 15)))
+		return (0);
+	if (!(dst2 = (char *)malloc(sizeof(char) * 15)))
+		return (0);
+	dst1 = memset(dst1, 0, 15);
+	dst1 = memset(dst1, 'r', 6);
+	dst2 = memset(dst2, 0, 15);
+	dst2 = memset(dst2, 'r', 6);
+
+	printf("ft_strlcpy result: %zu\n", ft_strlcpy(dst1, src, 15));
+	write(1, dst1, 15);
+	printf("\nstrlcpy result: %zu\n", strlcpy(dst2, src, 15));
+	write(1, dst2, 15);
+	printf("\n");
 	return (0);
 }
