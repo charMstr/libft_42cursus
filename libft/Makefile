@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/11/12 17:50:12 by charmstr         ###   ########.fr        #
+#    Updated: 2019/11/13 18:20:53 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,11 @@ BONUS_FILES = lstadd_back\
 	lstmap\
 	lstnew\
 	lstsize\
+	lstrev\
+	itoa_base\
+	strrev\
+	putbits_fd\
+	putbytes_fd\
 
 # you can here decide to put srcs/ft_%.c, same for objects, objs/ft_%.o
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))

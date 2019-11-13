@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:37:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/12 13:30:54 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 18:22:52 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,11 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 		void (*del)(void *));
+
+t_list				*ft_lstrev(t_list *lst);
+char				*ft_itoa_base(int number, int base);
+char				*ft_strrev(char *str);
+void				ft_putbits_fd(char c, int fd);
+void				ft_putbytes_fd(void *thing, int sizeof_thing, int fd);
 
 #endif
