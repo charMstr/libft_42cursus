@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 15:14:16 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 17:39:13 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:44:18 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@
 #include "libft.h"
 #define MAX_BASE 16
 
-static void	prepare_symbols_array(char *symb_array, int base)
-{
-	int i;
-
-	i = -1;
-	while (i < base)
-	{
-		if (i < 10)
-			symb_array[i] = i + '0';
-		else
-			symb_array[i] = 'A' - 10 + i;
-		i++;
-	}
-	symb_array[i] = '\0';
-}
-
 static int	predict_size(int num, int base)
 {
 	int i;
@@ -56,30 +40,43 @@ static int	predict_size(int num, int base)
 	return (i);
 }
 
-char *ft_itoa_base(int number, int base)
+static void	prepare_tab(char tab[][17])
 {
-	char *tab;
-	char *str;
-	int	size;
-	int neg;
+	int i;
 
+	i = 0;
+	while (i < 16)
+	{
+		if (i < 10)
+			(*tab)[i] = i + 48;
+		else
+			(*tab)[i] = 'A' + i - 10;
+		i++;
+	}
+	tab[0][16] = '\0';
+}
+
+char		*ft_itoa_base(int number, int base)
+{
+	char	*str;
+	int		size;
+	int		neg;
+	char	tab[17];
+
+	prepare_tab(&tab);
 	if (base > MAX_BASE || base < 2)
 		return (NULL);
-	if (!(tab = (char*)malloc(sizeof(char) * base + 1)))
-		return (NULL);
-	prepare_symbols_array(tab, base);
 	size = predict_size(number, base);
 	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	str[size] = '\0';
-	neg =  (base == 10 && number < 0) ? 1 : 0;
-	while (--size > -1)
+	neg = (base == 10 && number < 0) ? 1 : 0;
+	while (--size >= 0)
 	{
 		str[size] = (number < 0) ? tab[-(number % base)] : tab[number % base];
 		number = number / base;
 	}
 	neg ? str[0] = '-' : 0;
-	free(tab);
 	return (str);
 }
 

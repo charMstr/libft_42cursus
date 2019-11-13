@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 16:00:03 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:03:20 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ char		**ft_split(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	if (!s || !(ptr = (char **)malloc(sizeof(char*) * size_array(s, c) + 1)))
+	if (!s || !(ptr = (char **)malloc(sizeof(char*) * (size_array(s, c) + 1))))
 		return (NULL);
-	ptr[size_array(s, c)] = NULL;
 	while (k < size_array(s, c))
 	{
 		i = find_start(s, c, i);
@@ -96,20 +95,27 @@ char		**ft_split(char const *s, char c)
 
 int	main(int argc, char *argv[])
 {
-	char *string = "  hey  salut ca va ? ";
+	char *string;
 	char **ptr;
 	int i;
+	char c;
 
-	argc = (int)argc;
-	argv[0] = argv[0];
+	if (argc != 3)
+	{
+		printf("failed to povide 2 arg: string to be split, and separator char\n");
+		return (0);
+	}
+	string = argv[1];
+	c = argv[2][0];
 	i = 0;
 	printf("original string :\n%s\n",string);
-	printf("elements that need a  malloc : %d\n", size_array(string, 'h'));
-	ptr = ft_split(string, 'h');
+	printf("\n");
+	ptr = ft_split(string, c);
 	while (ptr[i])
 	{
 		printf("%s\n", ptr[i]);
 		i++;
 	}
+	free_nested(ptr, size_array(string, c));
 	return (0);
 }

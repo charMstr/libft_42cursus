@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 22:09:21 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/12 14:26:58 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/14 00:03:02 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	if (dstsize == 0)
 		return (len_src);
-	while (i < len_dst)
-	{
+	while (i < len_dst && i < dstsize)
 		i++;
-	}
 	while (i < dstsize - 1 && (i - len_dst) < len_src)
 	{
 		*(dst + i) = *(src + i - len_dst);
@@ -58,18 +56,14 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!(dst2 = (char *)malloc(sizeof(char) * 15)))
 		return (0);
-	memset(dst1, 0, 15);
-	memset(dst1, 'r', 6);
-	memset(dst2, 0, 15);
-	memset(dst2, 'r', 6);
 
-	dst1[0] = '\0';
-	dst2[0] = '\0';
-	dst1[11] = 'a';
-	dst2[11] = 'a';
-	printf("strlcat    :%zu\n",strlcat(dst2, src, 15));
-	write(1, dst2, 15);
-	printf("\nft_strlcat :%zu\n",ft_strlcat(dst1, src, 15));
+	memset(dst1, 'r', 15);
+	//printf("%zu\n",strlcat(dst1, "lorem ipsum dolor sit amet", 5));
 	write(1, dst1, 15);
+
+	printf("\n");
+	memset(dst2, 'r', 15);
+	printf("%zu\n",ft_strlcat(dst2, "lorem ipsum dolor sit amet", 5));
+	write(1, dst2, 15);
 	return (0);
 }

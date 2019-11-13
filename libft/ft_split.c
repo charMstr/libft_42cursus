@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 16:02:33 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:05:05 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char		**ft_split(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	if (!s || !(ptr = (char **)malloc(sizeof(char*) * size_array(s, c) + 1)))
+	if (!s || !(ptr = (char **)malloc(sizeof(char*) * (size_array(s, c) + 1))))
 		return (NULL);
 	ptr[size_array(s, c)] = NULL;
 	while (k < size_array(s, c))

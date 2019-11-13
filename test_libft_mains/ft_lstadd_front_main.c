@@ -1,4 +1,3 @@
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
@@ -49,6 +48,7 @@ int	main()
 	ptr_num = &num;
 	head_list = ft_lstnew(ptr_num);
 	printf("%d\n", *((int*)head_list->content));
+	printf("\n");
 	ft_lstadd_front(&head_list, ft_lstnew(&num2));
 	display_linked_list(head_list);
 	ft_lstadd_front(NULL, ft_lstnew(&num2));
