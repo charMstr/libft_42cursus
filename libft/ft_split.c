@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 21:07:18 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 16:02:33 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 
 static int	find_start(char const *s, char c, int next_start)
 {
-	while (s[next_start] == c)
+	while (s[next_start] && s[next_start] == c)
 		next_start++;
 	return (next_start);
 }
 
 static int	find_end(char const *s, char c, int next_end)
 {
-	while (s[next_end] == c)
+	while (s[next_end] && s[next_end] == c)
 		next_end++;
 	while (s[next_end] && s[next_end] != c)
 		next_end++;
@@ -68,24 +68,27 @@ static void	*free_nested(char **ptr, int k)
 
 char		**ft_split(char const *s, char c)
 {
-	char	**ptr_array;
+	char	**ptr;
 	int		i;
 	int		k;
+	int		j;
 
 	i = 0;
 	k = 0;
-	if (!s || !(ptr_array = (char **)malloc(sizeof(char*) * size_array(s, c) \
-					+ 1)))
+	if (!s || !(ptr = (char **)malloc(sizeof(char*) * size_array(s, c) + 1)))
 		return (NULL);
-	ptr_array[size_array(s, c)] = NULL;
-	while (ptr_array[k])
+	ptr[size_array(s, c)] = NULL;
+	while (k < size_array(s, c))
 	{
-		ptr_array[k] = ft_substr(s, find_start(s, c, i), find_end(s, c, i) \
-				- find_start(s, c, i));
-		if (!(ptr_array[k]))
-			return (free_nested(ptr_array, k));
-		i = find_end(s, c, i) + 1;
+		i = find_start(s, c, i);
+		if (!(ptr[k] = (char *)malloc(sizeof(char) * (find_end(s, c, i) - i \
+							+ 1))))
+			return (free_nested(ptr, k));
+		j = 0;
+		while (s[i] && s[i] != c)
+			ptr[k][j++] = s[i++];
+		ptr[k][j] = '\0';
 		k++;
 	}
-	return (ptr_array);
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 21:26:50 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 00:50:44 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/13 16:00:03 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 
 static int	find_start(char const *s, char c, int next_start)
 {
-	while (s[next_start] == c)
+	while (s[next_start] && s[next_start] == c)
 		next_start++;
 	return (next_start);
 }
 
 static int	find_end(char const *s, char c, int next_end)
 {
-	while (s[next_end] == c)
+	while (s[next_end] && s[next_end] == c)
 		next_end++;
 	while (s[next_end] && s[next_end] != c)
 		next_end++;
@@ -69,43 +69,46 @@ static void	*free_nested(char **ptr, int k)
 
 char		**ft_split(char const *s, char c)
 {
-	char **ptr_array;
+	char **ptr;
 	int i;
 	int k;
+	int j;
 
 	i = 0;
 	k = 0;
-	if (!s || !(ptr_array = (char **)malloc(sizeof(char*) * size_array(s, c) \
-					+ 1)))
+	if (!s || !(ptr = (char **)malloc(sizeof(char*) * size_array(s, c) + 1)))
 		return (NULL);
-	ptr_array[size_array(s, c)] = NULL;
-	while (ptr_array[k])
+	ptr[size_array(s, c)] = NULL;
+	while (k < size_array(s, c))
 	{
-		ptr_array[k] = ft_substr(s, find_start(s, c, i), find_end(s, c, i) \
-				- find_start(s, c, i));
-		if(!(ptr_array[k]))
-			return (free_nested(ptr_array, k));
-		i = find_end(s, c, i) + 1;
+		i = find_start(s, c, i);
+		if(!(ptr[k] = (char *)malloc(sizeof(char) * (find_end(s, c, i) - i \
+							+ 1))))
+			return (free_nested(ptr, k));
+		j = 0;
+		while (s[i] && s[i] != c)
+			ptr[k][j++] = s[i++];
+		ptr[k][j] = '\0';
 		k++;
 	}
-	return (ptr_array);
+	return (ptr);
 }
 
 int	main(int argc, char *argv[])
 {
 	char *string = "  hey  salut ca va ? ";
-	char **ptr_array;
+	char **ptr;
 	int i;
 
 	argc = (int)argc;
 	argv[0] = argv[0];
 	i = 0;
 	printf("original string :\n%s\n",string);
-	printf("size malloc : %d\n", size_array(string, ' '));
-	ptr_array = ft_split(string, ' ');
-	while (ptr_array[i])
+	printf("elements that need a  malloc : %d\n", size_array(string, 'h'));
+	ptr = ft_split(string, 'h');
+	while (ptr[i])
 	{
-		printf("%s\n", ptr_array[i]);
+		printf("%s\n", ptr[i]);
 		i++;
 	}
 	return (0);
