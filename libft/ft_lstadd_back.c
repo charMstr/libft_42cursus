@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 15:02:30 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 15:47:52 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/14 20:51:11 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
 	t_list *tmp;
-	t_list *previous;
 
 	if (!alst || !new)
 		return ;
@@ -31,11 +30,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		return ;
 	}
 	tmp = *alst;
-	previous = NULL;
-	while (tmp != NULL)
-	{
-		previous = tmp;
+	while (tmp->next)
 		tmp = tmp->next;
-	}
-	previous->next = new;
+	tmp->next = new;
 }
