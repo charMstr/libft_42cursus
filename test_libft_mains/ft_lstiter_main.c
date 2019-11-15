@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 19:02:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 19:45:22 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:05:04 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdio.h>
 
 /*
+** note: iteration of f function on every CONTENTS of every links of the list
+**
 ** note: iteration of f function on every CONTENTS of every links of the list
 */
 
@@ -23,8 +25,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		return ;
 	while (lst)
 	{
-		if (!(lst->content == NULL))
-			(*f)(lst->content);
+		(*f)(lst->content);
 		lst = lst->next;
 	}
 }
