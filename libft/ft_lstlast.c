@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:47:23 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/11 15:02:40 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/01 23:30:42 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list *previous;
-
-	previous = NULL;
-	while (lst != NULL)
-	{
-		previous = lst;
+	if (lst == NULL || lst->next == NULL)
+		return (lst);
+	while (lst->next != NULL)
 		lst = lst->next;
-	}
-	return (previous);
+	return (lst);
 }
