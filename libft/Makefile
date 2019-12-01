@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/11/13 18:20:53 by charmstr         ###   ########.fr        #
+#    Updated: 2019/12/01 17:45:49 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ FILES = atoi\
 	memcpy\
 	memmove\
 	memset\
+	stringify\
 	putchar_fd\
 	putendl_fd\
 	putnbr_fd\
