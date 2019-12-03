@@ -6,7 +6,7 @@
 /*   By: charmstr <charmstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 17:38:12 by charmstr          #+#    #+#             */
-/*   Updated: 2019/12/01 17:44:27 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/03 01:02:00 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	count_escape_sequence(char *str)
 	return (extra_len + len);
 }
 
-char		*stringify(char *line)
+char		*ft_stringify(char *line)
 {
 	char	*new;
 	int		lim;
