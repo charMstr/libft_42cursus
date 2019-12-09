@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/12/09 03:12:55 by charmstr         ###   ########.fr        #
+#    Updated: 2019/12/09 14:22:50 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ BLACK_BG = \033[48;5;0m
 CLEAR_COLOR = \033[m
 
 NAME_BG = \033[48;5;39m 
-BONUS_BG = \033[48;5;213m
 OBJECTS_BG = \033[48;5;11m
 RANLIB_BG = \033[48;5;172m
 
@@ -65,8 +64,7 @@ FILES = atoi\
 	substr\
 	tolower\
 	toupper\
-
-BONUS_FILES = lstadd_back\
+	lstadd_back\
 	lstadd_front\
 	lstclear\
 	lstdelone\
@@ -83,12 +81,8 @@ BONUS_FILES = lstadd_back\
 	putbits_fd\
 	putbytes_fd\
 
-# you can here decide to put srcs/ft_%.c, same for objects, objs/ft_%.o
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
-
-SRC_BONUS = $(addprefix $(OBJ_PATH)ft_,$(addsuffix .c, $(BONUS_FILES)))
-OBJ_BONUS =$(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -98,26 +92,10 @@ $(OBJ_PATH):
 
 $(NAME): $(OBJ) $(FT_H)
 	@echo "\t\t$(CREAT_FG)building Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
-
-	ar -rc $@ $^
-
-	@echo "\t\t$(CREAT_FG)indexing Library  $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(RANLIB_BG)$(BLACK_FG) ranlib $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
-	@ranlib $@
+	@ar -src $@ $(OBJ)
 
 $(OBJ): $(OBJ_PATH)%.o: %.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-
-$(OBJ_BONUS): $(OBJ_PATH)%.o : %.c | $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-
-
-bonus: $(OBJ_BONUS) $(OBJ) $(FT_H)
-	@echo "\t\t$(CREAT_FG)building Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(BONUS_BG)$(BLACK_FG) BONUSES $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
-
-	ar -rc $(NAME) $^
-
-	@echo "\t\t$(CREAT_FG)indexing Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) with $(RANLIB_BG)$(BLACK_FG) ranlib $(BLACK_BG)$(CREAT_FG)...$(CLEAR_COLOR)"
-	@ranlib $(NAME)
 
 clean:
 	@echo "\t\t$(REMOVE_FG)deleting $(OBJECTS_BG)$(BLACK_FG)$(OBJ_PATH) $(BLACK_BG)$(REMOVE_FG) containing all the .o files...$(CLEAR_COLOR)" 

@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 16:42:23 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 23:44:10 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/09 03:14:47 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,6 @@
 
 #include "libft.h"
 #define MAX_BASE 16
-
-static int	predict_size(int num, int base)
-{
-	int i;
-
-	i = 1;
-	if (base == 10 && num < 0)
-		i++;
-	while (num >= base || num <= -base)
-	{
-		num = num / base;
-		i++;
-	}
-	return (i);
-}
 
 static void	prepare_tab(char tab[][17])
 {
@@ -64,7 +49,7 @@ char		*ft_itoa_base(int number, int base)
 	prepare_tab(&tab);
 	if (base > MAX_BASE || base < 2)
 		return (NULL);
-	size = predict_size(number, base);
+	size = ft_size_num_base(number, base);
 	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	str[size] = '\0';

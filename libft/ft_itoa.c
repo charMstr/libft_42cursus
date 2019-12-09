@@ -6,33 +6,18 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 00:07:52 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 00:22:37 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/09 03:14:34 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	predict_size(int n)
-{
-	int size;
-
-	size = 0;
-	if (n < 0)
-		size++;
-	while (n < -9 || n > 9)
-	{
-		size++;
-		n = n / 10;
-	}
-	return (++size);
-}
 
 char		*ft_itoa(int n)
 {
 	char	*ptr;
 	int		size;
 
-	size = predict_size(n);
+	size = ft_size_num_base(n, 10);
 	if (!(ptr = (char *)malloc(sizeof(*ptr) * (size + 1))))
 		return (NULL);
 	ptr[size] = '\0';
