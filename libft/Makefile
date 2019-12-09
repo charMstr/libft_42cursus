@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/12/09 01:58:24 by charmstr         ###   ########.fr        #
+#    Updated: 2019/12/09 03:12:55 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ FILES = atoi\
 	putstr_fd\
 	split\
 	strchr\
-	strichr\
 	strdup\
 	strjoin\
 	strlcat\
@@ -78,7 +77,9 @@ BONUS_FILES = lstadd_back\
 	lstsize\
 	lstrev\
 	itoa_base\
+	size_num_base\
 	strrev\
+	strichr\
 	putbits_fd\
 	putbytes_fd\
 
