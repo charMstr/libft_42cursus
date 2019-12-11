@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdio.h>
 /*
 ** note:	this function will predict the size of a number, given its base.
 **
@@ -34,4 +36,12 @@ int	ft_size_num_base(int num, int base, int absolute)
 		i++;
 	}
 	return (i);
+}
+
+int	main(int argc, char *argv[])
+{
+	int i;
+	i = ft_size_num_base(atoi(argv[1]), 10, atoi(argv[2]));
+	printf("%d\n", i);
+	return (0);
 }
