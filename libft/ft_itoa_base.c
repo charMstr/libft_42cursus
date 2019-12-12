@@ -23,6 +23,21 @@
 #include "libft.h"
 #define MAX_BASE 16
 
+static int	predict_size(int num, int base)
+{
+	int i;
+
+	i = 1;
+	if (base == 10 && num < 0)
+		i++;
+	while (num >= base || num <= -base)
+	{
+		num = num / base;
+		i++;
+	}
+	return (i);
+}
+
 static void	prepare_tab(char tab[][17])
 {
 	int i;
@@ -49,7 +64,7 @@ char		*ft_itoa_base(int number, int base)
 	prepare_tab(&tab);
 	if (base > MAX_BASE || base < 2)
 		return (NULL);
-	size = ft_size_num_base(number, base);
+	size = predict_size(number, base);
 	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	str[size] = '\0';
