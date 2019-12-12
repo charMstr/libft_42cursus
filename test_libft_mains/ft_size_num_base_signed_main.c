@@ -10,28 +10,55 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdio.h>
 /*
-** note:	this function will predict the size of a number, given its base.
+** note:	this function will predict the size of a number, given its base,
+**			its type signed or unsigned, and if you want the absolute size or
+**			not.
 **
 ** note2:	if the base is 10, and the numebr is negative and the option
 **			absolute is zero, then we add extra space for the minus sign.
-**
-** RETURN:	the predicted size of a given number, according to the base.
 */
 
-int	ft_size_num_base(long num, int base, int absolute)
+int	ft_size_num_base_signed(void *num, int base, int signed_, int absolute)
+{
+	int				i;
+	unsigned int	u_num;
+	int				s_num;
+
+	u_num = *(unsigned int*)num;
+	s_num = *(int*)num;
+	i = 0;
+	if (!s_num || !u_num)
+		return (1);
+	if (signed_)
+	{
+		if (base == 10 && s_num < 0 && !absolute)
+			i++;
+		while (s_num && ++i)
+			s_num = s_num / base;
+		return (i);
+	}
+	else
+	{
+		if (base == 10 && u_num < 0 && !absolute)
+			i++;
+		while (u_num && ++i)
+			u_num = u_num / base;
+		return (i);
+	}
+}
+
+int	main(int argc, char *argv[])
 {
 	int i;
+	int num;
 
-	i = 0;
-	if (num == 0)
-		return (1);
-	if (base == 10 && num < 0 && !absolute)
-		i++;
-	while (num)
-	{
-		num = num / base;
-		i++;
-	}
-	return (i);
+	num = atoi(argv[1]);
+	i = ft_size_num_base_signed(&num, 10, 1, atoi(argv[2]));
+	printf("size with the signed version:\n%d\n", i);
+	i = ft_size_num_base_signed(&num, 10, 0, atoi(argv[2]));
+	printf("size with the unsigned version:\n%d\n", i);
+	return (0);
 }

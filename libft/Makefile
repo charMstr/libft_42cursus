@@ -75,7 +75,7 @@ FILES = atoi\
 	lstsize\
 	lstrev\
 	itoa_base\
-	size_num_base\
+	size_num_base_signed\
 	strrev\
 	strichr\
 	putbits_fd\
