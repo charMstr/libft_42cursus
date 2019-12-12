@@ -19,7 +19,7 @@
 ** RETURN:	the predicted size of a given number, according to the base.
 */
 
-int	ft_size_num_base(int num, int base, int absolute)
+int	ft_size_num_base(long num, int base, int absolute)
 {
 	int i;
 

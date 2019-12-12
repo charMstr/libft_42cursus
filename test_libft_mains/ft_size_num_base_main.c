@@ -21,7 +21,7 @@
 ** RETURN:	the predicted size of a given number, according to the base.
 */
 
-int	ft_size_num_base(int num, int base, int absolute)
+int	ft_size_num_base(long num, int base, int absolute)
 {
 	int i;
 
@@ -41,7 +41,7 @@ int	ft_size_num_base(int num, int base, int absolute)
 int	main(int argc, char *argv[])
 {
 	int i;
-	i = ft_size_num_base(atoi(argv[1]), 10, atoi(argv[2]));
+	i = ft_size_num_base(atol(argv[1]), 10, atoi(argv[2]));
 	printf("%d\n", i);
 	return (0);
 }
