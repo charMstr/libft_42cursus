@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:37:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 18:22:52 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/15 15:06:10 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int					ft_tolower(int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
+int					ft_strichr(const char *str, char c);
 char				*ft_strrchr(const char *s, int c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				*ft_strnstr(const char *haystack, const char *needle, \
 		size_t len);
 int					ft_atoi(const char *str);
+int					ft_size_num_base(int num, int base);
 
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s1);
@@ -51,6 +53,7 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char				*ft_stringify(char *line);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
@@ -77,6 +80,7 @@ t_list				*ft_lstrev(t_list *lst);
 char				*ft_itoa_base(int number, int base);
 char				*ft_strrev(char *str);
 void				ft_putbits_fd(char c, int fd);
-void				ft_putbytes_fd(void *thing, int sizeof_thing, int fd);
+void				ft_putbytes_fd(void *thing, int sizeof_thing, \
+		int sizeof_elem, int fd);
 
 #endif

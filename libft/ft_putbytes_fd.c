@@ -6,26 +6,39 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:49:23 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/13 18:30:35 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/15 16:32:00 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: on the given fd, will print bytes after bytes of the void pointer.
+** note:	on the given fd, this function will print bytes after bytes of the
+**			void pointer.
 **
-** big endian
+** usage:	ex: ft_putbytes_fd(tab, sizeof(tab), sizeof(*tab), 1);
 */
 
-void	ft_putbytes_fd(void *thing, int sizeof_thing, int fd)
+static void	ft_putelem_fd(void *thing, int sizeof_elem, int fd)
 {
 	char *ptr;
 
 	ptr = (char*)thing;
-	if (!thing || !sizeof_thing)
+	if (!thing || !sizeof_elem)
 		return ;
-	if (sizeof_thing > 1)
-		ft_putbytes_fd(ptr + 1, --sizeof_thing, fd);
+	if (sizeof_elem > 1)
+		ft_putelem_fd(ptr + 1, --sizeof_elem, fd);
 	ft_putbits_fd(*ptr, fd);
+}
+
+void	ft_putbytes_fd(void *thing, int sizeof_thing, int sizeof_elem, int fd)
+{
+	if (!thing || !sizeof_thing || !sizeof_elem)
+		return ;
+	ft_putelem_fd(thing, sizeof_elem, fd);
+	if (sizeof_thing != sizeof_elem)
+		ft_putstr_fd("--", 1);
+	if (sizeof_thing > 1)
+		ft_putbytes_fd(thing + sizeof_elem, sizeof_thing - sizeof_elem, \
+				sizeof_elem, fd);
 }
