@@ -24,7 +24,7 @@ static void	ft_putelem_fd(void *thing, int sizeof_elem, int fd)
 	char *ptr;
 
 	ptr = (char*)thing;
-	if (!thing || !sizeof_elem)
+	if (!thing || sizeof_elem <= 0)
 		return ;
 	if (sizeof_elem > 1)
 		ft_putelem_fd(ptr + 1, --sizeof_elem, fd);
@@ -33,7 +33,7 @@ static void	ft_putelem_fd(void *thing, int sizeof_elem, int fd)
 
 void	ft_putbytes_fd(void *thing, int sizeof_thing, int sizeof_elem, int fd)
 {
-	if (!thing || !sizeof_thing || !sizeof_elem)
+	if (!thing || sizeof_thing <= 0 || sizeof_elem <= 0 || fd < 0)
 		return ;
 	ft_putelem_fd(thing, sizeof_elem, fd);
 	if (sizeof_thing != sizeof_elem)
