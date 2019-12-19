@@ -6,7 +6,7 @@
 /*   By: charmstr <charmstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 01:47:47 by charmstr          #+#    #+#             */
-/*   Updated: 2019/12/09 01:57:54 by charmstr         ###   ########.fr       */
+/*   Updated: 2019/12/19 19:06:09 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 **			-1 if failure
 */
 
-int ft_strichr(const char *str, char c)
+int	ft_strichr(const char *str, char c)
 {
 	int index;
 
