@@ -16,5 +16,10 @@ int	main(int argc __attribute__((unused)), char *argv[])
 {
 	int tab[4] = {251708297, 2, 3, 4};
 	ft_putbytes_fd(tab, sizeof(tab), sizeof(*tab), 1);
+	ft_putendl_fd("", 1);
+	ft_putbytes_fd(tab, -1, sizeof(*tab), 1);
+	ft_putendl_fd("", 1);
+	ft_putbytes_fd(tab, sizeof(tab), -1, 1);
+	ft_putendl_fd("", 1);
 	return (0);
 }
