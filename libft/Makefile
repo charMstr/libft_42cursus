@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/12/09 14:22:50 by charmstr         ###   ########.fr        #
+#    Updated: 2019/12/19 18:50:24 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ $(NAME): $(OBJ) $(FT_H)
 	@ar -src $@ $(OBJ)
 
 $(OBJ): $(OBJ_PATH)%.o: %.c | $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:
 	@echo "\t\t$(REMOVE_FG)deleting $(OBJECTS_BG)$(BLACK_FG)$(OBJ_PATH) $(BLACK_BG)$(REMOVE_FG) containing all the .o files...$(CLEAR_COLOR)" 
