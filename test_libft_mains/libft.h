@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:37:31 by charmstr          #+#    #+#             */
-/*   Updated: 2019/12/15 15:06:10 by charmstr         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:57:52 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ char				*ft_strrev(char *str);
 void				ft_putbits_fd(char c, int fd);
 void				ft_putbytes_fd(void *thing, int sizeof_thing, \
 		int sizeof_elem, int fd);
+char				**ft_arraydup(char **array);
+void				ft_free_2d(char **tab);
 
 #endif

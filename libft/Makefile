@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2019/12/19 18:50:24 by charmstr         ###   ########.fr        #
+#    Updated: 2020/01/30 16:04:00 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,8 @@ FILES = atoi\
 	strichr\
 	putbits_fd\
 	putbytes_fd\
+	arraydup\
+	free_2d\
 
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
