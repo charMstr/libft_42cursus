@@ -82,7 +82,7 @@ FILES = atoi\
 	putbytes_fd\
 	arraydup\
 	free_2d\
-	stristr
+	stristr\
 
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
