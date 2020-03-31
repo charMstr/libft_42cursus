@@ -15,16 +15,22 @@
 #include <string.h>
 
 /*
-** /!\ arguments are not protected against NULL pointers in original
+** note:	/!\ arguments are not protected against NULL pointers in original
+** note:	characters after a '\0' wont be compared
+** note:	to make sure both strings are 100% different: it should be used
+**			with <n> as ft_strlen(smallest string) + 1
 **
-** note: characters after a '\0' wont be compared
+** some example:
+**		str1: abcd
+**		str2: abcde
+**		now doing the call: ft_strncmp(str1, str2, ft_strlen(str1));
+**		--> result = 0
+**		now doing the call: ft_strncmp(str1, str2, ft_strlen(str1) + 1);
+**		--> result != 0
 **
-** if you want to make sure both strings are 100% different -->  should be used
-** with <n> as ft_strlen(smallest string) + 1
-**
-** RETURN: no difference -> 0. compares until index (n - 1)
+** RETURN:	0	-> equal (compares until index (n - 1))
+**			!0	-> different
 */
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -62,7 +68,18 @@ int	main(int argc, char *argv[])
 		}
 		i++;
 	}
-	printf("string size: %zu\ntring2 size : %zu\n", ft_strlen(string) , ft_strlen(string2));
+	printf("string size: %zu\nstring2 size : %zu\n", ft_strlen(string) , ft_strlen(string2));
 	//strncmp(NULL, string2, 1);
+
+	char *str2 = "abcd";
+	char *str1 = "abcde";
+	int res;
+	printf("str1: [%s]\n", str1);
+	printf("str2: [%s]\n", str2);
+	printf("now doing the call: ft_strncmp(str1, str2, ft_strlen(str1));\n");
+	res = ft_strncmp(str1, str2, ft_strlen(str1));
+	printf("result: %d\n", res);
+	res = ft_strncmp(str1, str2, ft_strlen(str1) + 1);
+	printf("result: %d\n", res);
 	return (0);
 }
