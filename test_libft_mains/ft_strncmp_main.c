@@ -17,8 +17,10 @@
 /*
 ** note:	/!\ arguments are not protected against NULL pointers in original
 ** note:	characters after a '\0' wont be compared
-** note:	to make sure both strings are 100% different: it should be used
+** note:	To make sure both strings are 100% different: it should be used
 **			with <n> as ft_strlen(smallest string) + 1
+**			So just add a plus one no matter what to ft_strlen(str1/2) to have
+**			a standard strcmp behavior.
 **
 ** some example:
 **		str1: abcd
