@@ -15,9 +15,26 @@
 #include <string.h>
 
 /*
-** note: if start > strlen(s) or s is "", returns "" and not NULL
+** note:	if the len parameter is bigger than the length of str we will stop
+**			at the end of str.
+** note:	if start > strlen(s) or s is empty, returns an empty string.:w
+** note:	the length of the substring: min(len, strlen(str +  start)).
 **
-** RETURN: pointer on new substring which is len length, NULL if malloc failed
+** some examples:
+**		str1:[0123456789HowYouDoing?]
+**		absolute position of char '3' is: 3
+**
+**		do the call ft_substr(str1, start=0, 3);
+**		now printing the substring: [012]
+**
+**		do the call ft_substr(str1, 3, ft_strlen(str1) - 3);
+**		now printing the substring2: [3456789HowYouDoing?]
+**
+**		do the call ft_substr(str1, 0, ft_strlen(str1) - 1);
+**		now printing the substring3: [0123456789HowYouDoing]
+**
+** RETURN:	pointer on new substring
+**			NULL if malloc failed
 */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -51,10 +68,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 int	main()
 {
 	char *str1 = "0123456789HowYouDoing?";
-	char *result;
+	char *substr;
+	char *substr2;
+	char *substr3;
+	int position;
 
-	result = ft_substr("test", 10, 2);
-	printf("%s\n", result);
-	ft_putstr_fd(result, 1);
+	printf("str1:[%s]\n", str1);
+	position = ft_strichr(str1, '3');
+	printf("absolute position of char '3' is: %d\n", position);
+	printf("\ndo the call ft_substr(str1, start=0, 3);\n");
+	substr = ft_substr(str1, 0, position);
+	printf("now printing the substring: [%s]\n", substr);
+	printf("\ndo the call ft_substr(str1, 3, ft_strlen(str1) - 3);\n");
+	substr2 = ft_substr(str1, 3, ft_strlen(str1) - 3);
+	printf("now printing the substring2: [%s]\n", substr2);
+	printf("\ndo the call ft_substr(str1, 0, ft_strlen(str1) - 1);\n");
+	substr3 = ft_substr(str1, 0, ft_strlen(str1) - 1);
+	printf("now printing the substring3: [%s]\n", substr3);
+
 	return (0);
 }
