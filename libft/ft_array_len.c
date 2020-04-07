@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arraydup.c                                      :+:      :+:    :+:   */
+/*   ft_array_len.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <charmstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,37 +13,23 @@
 #include "libft.h"
 
 /*
-** note:	this function will make a duplicate of a two dimensional array.
+** note:	this function will return the length of a two dimension chararray
 **
-** RETURN:	NULL -> failure in malloc or inside ft_strdup.
-**			char **fully copied 2d array.
+** RETURN:	-1 if array itself is NULL
+**			0 the first string was NULL
+**			>0 for the number of substrings non NULL
 */
 
-char	**ft_arraydup(char **array)
+int	ft_array_len(char **array)
 {
-	char	**copy;
-	int		i;
-	int		height;
+	int i;
 
-	height = 0;
 	i = 0;
 	if (!array)
-		return (NULL);
-	while (array[height])
-		height++;
-	if (!(copy = (char **)malloc(sizeof(char *) * (height + 1))))
-		return (NULL);
-	copy[height] = NULL;
-	while (i < height)
+		return (-1);
+	while (array[i])
 	{
-		if (!(copy[i] = ft_strdup(array[i])))
-		{
-			while (--i >= 0)
-				free(copy[i]);
-			free(copy);
-			return (NULL);
-		}
 		i++;
 	}
-	return (copy);
+	return (i);
 }

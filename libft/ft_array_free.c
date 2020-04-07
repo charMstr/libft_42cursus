@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_2d.c                                       :+:      :+:    :+:   */
+/*   ft_array_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <charmstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,10 +13,10 @@
 #include "libft.h"
 
 /*
-** note:	this function will free a two dimension char array.
+** note:	this function will free a two dimensional char array.
 */
 
-void	ft_free_2d(char **tab)
+void	ft_array_free(char **tab)
 {
 	int i;
 
