@@ -82,8 +82,9 @@ char				*ft_strrev(char *str);
 void				ft_putbits_fd(char c, int fd);
 void				ft_putbytes_fd(void *thing, int sizeof_thing, \
 		int sizeof_elem, int fd);
-char				**ft_arraydup(char **array);
-void				ft_free_2d(char **tab);
+char				**ft_array_dup(char **array);
+void				*ft_array_free(char **ptr, int k);
+int					ft_array_len(char **array);
 int					ft_stristr(const char *str, char *stack);
 
 #endif

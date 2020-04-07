@@ -14,19 +14,22 @@
 
 /*
 ** note:	this function will free a two dimensional char array.
+** input:	- ptr:	the two dimension array to be freed,
+**			- k:	the index from wich to start decreasing.
+**
+** exemple:	ft_array_free(array, ft_array_len(array));
+**
+** RETURN:	NULL for context convenience
 */
 
-void	ft_array_free(char **tab)
+void	*ft_array_free(char **ptr, int k)
 {
-	int i;
-
-	i = 0;
-	if (!(tab))
-		return ;
-	while (tab[i])
+	while (--k >= 0)
 	{
-		free(tab[i]);
-		i++;
+		free (ptr[k]);
+		ptr[k] = NULL;
 	}
-	free(tab);
+	free(ptr);
+	ptr = NULL;
+	return (NULL);
 }

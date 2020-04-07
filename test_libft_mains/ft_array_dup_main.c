@@ -83,7 +83,7 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	tab[1][0] = 's';
 	tab_display(tab);
 	tab_display(copy);
-	ft_array_free(tab);
-	ft_array_free(copy);
+	ft_array_free(tab, ft_array_len(tab));
+	ft_array_free(copy, ft_array_len(copy));
 	return (0);
 }
