@@ -84,6 +84,7 @@ FILES = atoi\
 	array_free\
 	stristr\
 	array_len\
+	strappend\
 
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

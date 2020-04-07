@@ -79,6 +79,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 t_list				*ft_lstrev(t_list *lst);
 char				*ft_itoa_base(int number, int base);
 char				*ft_strrev(char *str);
+int					ft_strappend(char **str, char c);
 void				ft_putbits_fd(char c, int fd);
 void				ft_putbytes_fd(void *thing, int sizeof_thing, \
 		int sizeof_elem, int fd);
