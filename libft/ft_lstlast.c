@@ -13,7 +13,8 @@
 #include "libft.h"
 
 /*
-** RETURN: pointer to very last link, NULL if the head of list pointer was NULL
+** RETURN:	pointer to very last link
+**			NULL if the head of list pointer was NULL
 */
 
 t_list	*ft_lstlast(t_list *lst)

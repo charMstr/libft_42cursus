@@ -13,10 +13,10 @@
 #include "libft.h"
 
 /*
-** note: first arg should be the ADDRESS (&...) of an existing link
-** or a pointer to a linked list (therefore a t_list ** pointer)
+** note:	first arg should be the ADDRESS (&...) of an existing link
+**			or a pointer to a linked list (therefore a t_list ** pointer)
 **
-** note: the second arg shoud be a call to ft_lstnew(void *content).
+** note:	the second arg shoud be a call to ft_lstnew(void *content).
 */
 
 void	ft_lstadd_front(t_list **alst, t_list *new)

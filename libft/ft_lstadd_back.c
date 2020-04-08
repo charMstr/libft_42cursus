@@ -13,9 +13,10 @@
 #include "libft.h"
 
 /*
-** note: arg1: head of list, (ex: &head)	arg2: new link to be added
+** input:	- arg1: head of list, (ex: &head)
+**			- arg2: new link to be added
 **
-** note2: if *alst is NULL, it means the list was empty. new list is created
+** note2:	if *alst is NULL, it means the list was empty. new list is created
 */
 
 void	ft_lstadd_back(t_list **alst, t_list *new)

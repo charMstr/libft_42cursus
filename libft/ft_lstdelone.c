@@ -13,20 +13,19 @@
 #include "libft.h"
 
 /*
-** note: reconnecting the previous and the following link should be done before
-** calling this function
+** note:	if we want to extract a link that is in the middle of a list,
+**			reconnecting the previous and the following link should be done
+**			before calling this function, therefore content->next is never free
 **
-** note2: therefore content->next is never freed.
-**
-** note3: the (*del) function shoud be written specific to content
+** note:	the (*del) function shoud be written specific to content
 */
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (!lst || !del)
-		return ;
-	if (!(lst->content == NULL))
-		(*del)(lst->content);
-	free(lst);
-	lst = NULL;
+	if (lst)
+	{
+		if (del)
+			del(lst->content);
+		free(lst);
+	}
 }

@@ -15,7 +15,8 @@
 /*
 ** note: arg = the head of the list
 **
-** RETURN: list's size		or		ZERO if pointer was NULL
+** RETURN:	list's size
+**			0 if pointer was NULL
 */
 
 int	ft_lstsize(t_list *lst)

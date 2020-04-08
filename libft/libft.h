@@ -87,5 +87,6 @@ char				**ft_array_dup(char **array);
 void				*ft_array_free(char **ptr, int k);
 int					ft_array_len(char **array);
 int					ft_stristr(const char *str, char *stack);
+void				ft_free(void **ptr);
 
 #endif

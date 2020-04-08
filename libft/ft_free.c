@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 17:50:59 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 18:32:53 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/12 16:23:04 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/12 16:23:07 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** note: next = NULL, content = the argument
-** note: if content is NULL it doesnt mather it is still created as is.
-**
-** RETURN:	new link that was malloced
-**			NULL pointer if failure
+** note:	give the address of the pointer you want to free, so that we can
+**			set the pointer itself to NULL.
 */
 
-t_list	*ft_lstnew(void *content)
+void	ft_free(void **ptr)
 {
-	t_list *ptr_new_link;
-
-	if (!(ptr_new_link = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	ptr_new_link->content = content;
-	ptr_new_link->next = NULL;
-	return (ptr_new_link);
+	free(*ptr);
+	*ptr = NULL;
 }
