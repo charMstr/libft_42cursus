@@ -52,7 +52,16 @@ int	main(int argc, char *argv[])
 	char *ptr2 = "sa va comme tu veux?";
 	char *ptr3;
 
+	if (argc != 3)
+	{
+		printf("need to provide 2 strings as arguments\n");
+		return (0);
+	}
 	ptr3 = ft_strjoin(ptr1, ptr2);
 	printf("%s\n", ptr3);
+	free(ptr3);
+	ptr3 = ft_strjoin(argv[1], argv[2]);
+	printf("%s\n", ptr3);
+	free(ptr3);
 	return (0);
 }
