@@ -88,5 +88,7 @@ void				*ft_array_free(char **ptr, int k);
 int					ft_array_len(char **array);
 int					ft_stristr(const char *str, char *stack);
 void				ft_free(void **ptr);
+int					ft_strcdel(char **str, size_t i);
+int					ft_strcadd(char **str, char c, size_t index);
 
 #endif
