@@ -88,6 +88,13 @@ FILES = atoi\
 	free\
 	strcdel\
 	strcadd\
+	dlstnew\
+	dlstadd_back\
+	dlstadd_front\
+	dlstfirst\
+	dlstlast\
+	dlstclear\
+	dlstdelone\
 
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
