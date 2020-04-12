@@ -105,5 +105,7 @@ t_dlist				*ft_dlstfirst(t_dlist *lst);
 t_dlist				*ft_dlstlast(t_dlist *lst);
 void				ft_dlstclear(t_dlist **lst, void (*del)(void *));
 void				ft_dlstdelone(t_dlist *lst, void (*del)(void *));
+void				ft_dlstpop_back(t_dlist **head, void (*del)(void*));
+void				ft_dlstpop_front(t_dlist **head, void (*del)(void*));
 
 #endif

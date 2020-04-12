@@ -95,6 +95,8 @@ FILES = atoi\
 	dlstlast\
 	dlstclear\
 	dlstdelone\
+	dlstpop_back\
+	dlstpop_front\
 
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
