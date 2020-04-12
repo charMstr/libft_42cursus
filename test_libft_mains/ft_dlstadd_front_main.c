@@ -35,6 +35,15 @@ void	display_lst_to_previous(t_dlist *lst)
 	}
 }
 
+void debug_link(t_dlist *lst)
+{
+	if (!lst)
+		return ;
+	printf("link: [%p]\n", lst);
+	printf("link->next: [%p]\n", lst->next);
+	printf("link->previous: [%p]\n", lst->previous);
+}
+
 int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 {
 	t_dlist *head;
@@ -47,34 +56,30 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	char *str5 = "5HEY";
 
 	head = NULL;
-	if (!(new = ft_dlstnew((void*)str1)))
-	{
-		printf("failed to creat link\n");
-		return (0);
-	}
+	ft_dlstnew((void*)str1);
 	ft_dlstadd_front(&head, new);
+	debug_link(head);
+
 	new = ft_dlstnew((void*)str2);
 	ft_dlstadd_front(&head, new);
+	debug_link(head);
+
+	printf("debugging from the start:\n");
+	display_lst_to_previous(head);
+	display_lst_to_next(head);
+
 	new = ft_dlstnew((void*)str3);
 	//store a random link from the middle
 	some_link = new;
 	ft_dlstadd_front(&head, new);
+
 	new = ft_dlstnew((void*)str4);
 	ft_dlstadd_front(&head, new);
-	printf("debugging from the start:\n");
-	display_lst_to_previous(head);
-	display_lst_to_next(head);
-	printf("\nNOW debugging from a link in the middle:\n");
-	display_lst_to_previous(some_link);
-	display_lst_to_next(some_link);
 
-	printf("\n\n----OK-----\n"\
-			"now adding a link from an adress in the middle of the l-list\n");
-	new = ft_dlstnew((void*)str5);
-	ft_dlstadd_front(&some_link, new);
 	printf("debugging from the start:\n");
 	display_lst_to_previous(head);
 	display_lst_to_next(head);
+
 	printf("\nNOW debugging from a link in the middle:\n");
 	display_lst_to_previous(some_link);
 	display_lst_to_next(some_link);

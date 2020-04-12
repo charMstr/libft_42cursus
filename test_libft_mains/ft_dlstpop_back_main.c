@@ -45,26 +45,33 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	t_dlist *head;
 	t_dlist *new;
 	t_dlist *some_link;
+	t_dlist *last;
 	char *str1 = ft_strdup("1HEY");
 	char *str2 = ft_strdup("2HEY");
 	char *str3 = ft_strdup("3HEY");
 	char *str4 = ft_strdup("4HEY");
 	char *str5 = ft_strdup("5HEY");
+	char *str6 = ft_strdup("6HEY");
+	char *str7 = ft_strdup("7HEY");
 
 	head = NULL;
-	if (!(new = ft_dlstnew((void*)str1)))
+	if (!(new = ft_dlstnew((void*)str3)))
 	{
 		printf("failed to creat link\n");
 		return (0);
 	}
 	ft_dlstadd_back(&head, new);
 	new = ft_dlstnew((void*)str2);
-	ft_dlstadd_back(&head, new);
-	new = ft_dlstnew((void*)str3);
-	//store a random link from the middle
+	ft_dlstadd_front(&head, new);
+	new = ft_dlstnew((void*)str4);
+	//saving a random link in the middle
 	some_link = new;
 	ft_dlstadd_back(&head, new);
-	new = ft_dlstnew((void*)str4);
+	new = ft_dlstnew((void*)str1);
+	ft_dlstadd_front(&head, new);
+	new = ft_dlstnew((void*)str5);
+	ft_dlstadd_back(&head, new);
+	new = ft_dlstnew((void*)str6);
 	ft_dlstadd_back(&head, new);
 	printf("debugging from the start:\n");
 	display_lst_to_previous(head);
@@ -73,22 +80,18 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	display_lst_to_previous(some_link);
 	display_lst_to_next(some_link);
 
-	printf("\n\n----OK-----\n"\
-			"now adding a link from an adress in the middle of the l-list\n");
-	new = ft_dlstnew((void*)str5);
-	ft_dlstadd_back(&some_link, new);
-	printf("debugging from the start:\n");
-	display_lst_to_previous(head);
-	display_lst_to_next(head);
-	printf("\nNOW debugging from a link in the middle:\n");
-	display_lst_to_previous(some_link);
-	display_lst_to_next(some_link);
-	printf("NOW DELETING THE LAST LINK in a loop\n");
+	printf("NOW DELETING THE FIRST LINK in a loop (starting from head)\n");
 	while (head)
 	{
-		printf("\ndebugging from the start:\n");
 		display_lst_to_next(head);
 		ft_dlstpop_back(&head, del_content);
 	}
+	ft_dlstpop_back(&head, del_content);
+	ft_dlstpop_back(&head, del_content);
+	new = ft_dlstnew((void*)str7);
+	ft_dlstadd_back(&head, new);
+	display_lst_to_next(head);
+	ft_dlstpop_back(&head, del_content);
+	ft_dlstpop_back(&head, del_content);
 	return (0);
 }

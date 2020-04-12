@@ -19,7 +19,7 @@ void	ft_dlstpop_back(t_dlist **head, void (*del)(void*))
 		then = (*current)->next;
 		if (!then)
 		{
-			free(*current);
+			ft_dlstdelone(*current, del);
 			*current = NULL;
 			return ;
 		}
