@@ -5,7 +5,7 @@
 **			see ft_dlstpop_back as well.
 */
 
-void	ft_dlstpop_front(t_dlist **head, void (*del)(void*))
+void	ft_dlstdel_front(t_dlist **head, void (*del)(void*))
 {
 	t_dlist *new_head;
 

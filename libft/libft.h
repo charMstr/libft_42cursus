@@ -34,6 +34,7 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
 int					ft_strichr(const char *str, char c);
@@ -67,11 +68,16 @@ typedef struct		s_list
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **alst, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **alst, t_list *new);
+void				ft_lstdel_front(t_list **alst, void	(*del)(void *));
+void				ft_lstdel_back(t_list **alst, void	(*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
+void				ft_lstdel_cmp(t_list **alst, void *data_ref, int (*cmp)(),\
+		void (*del)(void *));
+void				ft_lstadd_cmp(t_list **alst, t_list *new, int (*cmp)());
+int					ft_lstsize(t_list *lst);
+t_list				*ft_lstlast(t_list *lst);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 		void (*del)(void *));
@@ -105,7 +111,7 @@ t_dlist				*ft_dlstfirst(t_dlist *lst);
 t_dlist				*ft_dlstlast(t_dlist *lst);
 void				ft_dlstclear(t_dlist **lst, void (*del)(void *));
 void				ft_dlstdelone(t_dlist *lst, void (*del)(void *));
-void				ft_dlstpop_back(t_dlist **head, void (*del)(void*));
-void				ft_dlstpop_front(t_dlist **head, void (*del)(void*));
+void				ft_dlstdel_back(t_dlist **head, void (*del)(void*));
+void				ft_dlstdel_front(t_dlist **head, void (*del)(void*));
 
 #endif
