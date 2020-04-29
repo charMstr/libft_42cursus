@@ -82,6 +82,9 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 		void (*del)(void *));
 t_list				*ft_lstrev(t_list *lst);
+t_list				*ft_lstfind(t_list *alst, void *content_ref, int (*cmp)());
+t_list				*ft_lstget(t_list **alst, void *content_ref, int (*cmp)());
+void				ft_lstsort(t_list **alst, int (*cmp)());
 
 char				*ft_itoa_base(int number, int base);
 char				*ft_strrev(char *str);

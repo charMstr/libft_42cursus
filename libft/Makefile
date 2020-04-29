@@ -87,6 +87,9 @@ FILES = atoi\
 	lstmap\
 	lstsize\
 	lstrev\
+	lstfind\
+	lstget\
+	lstsort\
 	itoa_base\
 	size_num_base_signed\
 	strrev\
