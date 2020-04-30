@@ -37,74 +37,98 @@ BONUS_FG = \033[38;5;219m
 
 ###############################################################################
 ########################## SOURCE FILES #######################################
-FILES = atoi\
-	bzero\
-	calloc\
-	isalnum\
-	isalpha\
-	isascii\
-	isdigit\
-	isprint\
-	itoa\
+# display
+FILES += putchar_fd\
+	putendl_fd\
+	putnbr_fd\
+	putstr_fd\
+	putbits_fd\
+	putbytes_fd\
+
+# malloc / free
+FILES += calloc\
+	free\
+
+# memory manipulation
+FILES += bzero\
+	memset\
 	memccpy\
 	memchr\
 	memcmp\
 	memcpy\
 	memmove\
-	memset\
-	stringify\
-	putchar_fd\
-	putendl_fd\
-	putnbr_fd\
-	putstr_fd\
-	split\
-	strchr\
-	strdup\
-	strjoin\
-	strlcat\
-	strlcpy\
-	strlen\
-	strmapi\
-	strncmp\
-	strcmp\
-	strnstr\
-	strrchr\
-	strtrim\
-	substr\
+
+# char ID related
+FILES += isalnum\
+	isalpha\
+	isascii\
+	isdigit\
+	isprint\
 	tolower\
 	toupper\
-	lstnew\
-	lstadd_back\
+
+# str
+FILES += strlen\
+	strcmp\
+	strncmp\
+	strchr\
+	strrchr\
+	strichr\
+	stristr\
+	strnstr\
+	strlcat\
+	strlcpy\
+	strrev\
+	atoi\
+	size_num_base_signed\
+
+# str + malloc
+FILES += strdup\
+	substr\
+	strjoin\
+	strcdel\
+	strcadd\
+	strappend\
+	strtrim\
+	itoa\
+	itoa_base\
+	strmapi\
+	stringify\
+	split\
+
+# char** manipulation
+FILES += array_dup\
+	array_free\
+	array_len\
+	array_debug\
+	array_add\
+	array_to_lst\
+
+# simple linked list
+FILES += lstnew\
 	lstadd_front\
+	lstadd_back\
 	lstadd_cmp\
 	lstdel_front\
 	lstdel_back\
 	lstdel_cmp\
+	lstuniq\
 	lstclear\
 	lstdelone\
 	lstiter\
-	lstlast\
 	lstmap\
 	lstsize\
-	lstrev\
+	lstlast\
 	lstfind\
 	lstget\
+	lstrev\
 	lstsort\
-	itoa_base\
-	size_num_base_signed\
-	strrev\
-	strichr\
-	putbits_fd\
-	putbytes_fd\
-	array_dup\
-	array_free\
-	stristr\
-	array_len\
-	strappend\
-	free\
-	strcdel\
-	strcadd\
-	dlstnew\
+	lstmerge\
+	lstloop_proof\
+	lst_to_dlst\
+
+# double linked list
+FILES += dlstnew\
 	dlstadd_back\
 	dlstadd_front\
 	dlstfirst\

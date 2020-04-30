@@ -20,7 +20,7 @@
 **			>0 for the number of substrings non NULL
 */
 
-int	ft_array_len(char **array)
+int	ft_array_len(const char **array)
 {
 	int i;
 

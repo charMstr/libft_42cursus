@@ -13,23 +13,21 @@
 #include "libft.h"
 
 /*
-** note:	this function will free a two dimensional char array.
-** input:	- ptr:	the two dimension array to be freed,
+** note:	this function will free a two dimensional char array and set all
+**			pointers to NULL.
+** input:	- ptr:	the address of a two dimension array to be freed (&array)
 **			- k:	the index from wich to start decreasing.
+**					or simply ft_array_len().
 **
-** exemple:	ft_array_free(array, ft_array_len(array));
+** exemple:	ft_array_free(&array, ft_array_len((const char*)array));
 **
 ** RETURN:	NULL for context convenience
 */
 
-void	*ft_array_free(char **ptr, int k)
+void	*ft_array_free(char ***ptr, int k)
 {
 	while (--k >= 0)
-	{
-		free (ptr[k]);
-		ptr[k] = NULL;
-	}
-	free(ptr);
-	ptr = NULL;
+		ft_free((void**)&(ptr[0][k]));
+	ft_free((void**)ptr);
 	return (NULL);
 }

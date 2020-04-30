@@ -13,40 +13,9 @@
 #include "libft.h"
 #include <stdio.h>
 
-/*
-** note: iteration of (*f) on each link. see ft_lstiter if no copy wanted.
-**
-** note2: (*del) is passed to ft_lstclear to clean the whole new_list if a
-** malloc failed in ft_lstnew.
-**
-** RETURN: copy of lst which is modified according to (*f) function. The RETURN
-** can be NULL if lst is NULL or if failure mallocing midway
-*/
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list *new_list;
-	t_list *new_link;
-
-	new_list = NULL;
-	while (lst)
-	{
-		if (*f)
-			new_link = ft_lstnew((*f)(lst->content));
-		if (!new_link && (*del))
-		{
-			ft_lstclear(&new_list,(*del));
-			return (NULL);
-		}
-		ft_lstadd_back(&new_list, new_link);
-		lst = lst->next;
-	}
-	return (new_list);
-}
-
 void	display(t_list *lst, int a)
 {
-	printf("for list %d:\n", a);
+	printf("\nDEBUG list %d:\n", a);
 	while (lst)
 	{
 		printf("%s\n", (char*)lst->content);
@@ -72,27 +41,40 @@ void	*func1(void *content)
 
 void	del(void *content)
 {
-	content = (void *)content;
+	free(content);
 }
 
 int	main()
 {
 	t_list *head;
 	t_list	*copy;
+	char *uno;
+	char *dos;
+	char *tres;
+	char *quatro;
 
-	char *uno = ft_strdup("uno");
-	char *dos = ft_strdup("dos");
-	char *tres = ft_strdup("tres");
-	char *quatro = ft_strdup("quatro");
+	uno = ft_strdup("uno");
+	dos = ft_strdup("dos");
+	tres = ft_strdup("tres");
+	quatro = ft_strdup("quatro");
 
-	head = ft_lstnew(uno);
+	head = NULL;
+	ft_lstadd_back(&head, ft_lstnew(uno));
 	ft_lstadd_back(&head, ft_lstnew(dos));
 	ft_lstadd_back(&head, ft_lstnew(tres));
 	ft_lstadd_back(&head, ft_lstnew(quatro));
 	display(head, 1);
 
 	copy = ft_lstmap(head, func1, del);
-	display(copy, 2);
 	display(head, 1);
+	display(copy, 2);
+
+	ft_lstclear(&head, free);
+	display(head, 1);
+	ft_lstclear(&copy, del);
+	display(head, 2);
+	//leaks ok
+	while (1)
+		;
 	return (0);
 }

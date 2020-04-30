@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,18 +13,32 @@
 #include "libft.h"
 
 /*
-** input:	- arg1: head of list, (ex: &head)
-**			- arg2: new link to be added
-**
-** note:	can be used as a lstjoin. just put lst2 in second argument.
-** note:	if *alst is NULL, it means the list was empty. new becomes the head
+** note:	this function will merge lst2 inside alst1, repceting the sorted
+**			order imposed by the cmp function.
+** note:	lst2 and alst1 should have been sorted previously.
+** note:	if alst1 is NULL: we end up with alst1 pointing to lst2 once sorted
 */
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void ft_lstmerge(t_list **alst1, t_list *lst2, int (*cmp)())
 {
-	if (!alst || !new)
+	t_list	**head_copy;
+	t_list	*lst2_next_cpy;
+
+	if (!alst1 || !lst2 || !cmp)
 		return ;
-	while (*alst)
-		alst = &(*alst)->next;
-	*alst = new;
+	head_copy = alst1;
+	while (*alst1 && lst2)
+	{
+		if (cmp((*alst1)->content, lst2->content) <= 0)
+		{
+			lst2_next_cpy = lst2->next;
+			lst2->next = *alst1;
+			*alst1 = lst2;
+			lst2 = lst2_next_cpy;
+			alst1 = head_copy;
+		}
+		else
+			alst1 = &(*alst1)->next;
+	}
+	ft_lstadd_back(alst1, lst2);
 }

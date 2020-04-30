@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstloop_proof.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 15:02:30 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/14 20:51:11 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/11 19:02:31 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/15 13:02:43 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** input:	- arg1: head of list, (ex: &head)
-**			- arg2: new link to be added
+** note:	this function will determine if linked list is an infinite loop
 **
-** note:	can be used as a lstjoin. just put lst2 in second argument.
-** note:	if *alst is NULL, it means the list was empty. new becomes the head
+** RETURN:	0 stuck in Loop
+**			1 ok or NULL argument
 */
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+int	ft_lstloop_proof(t_list *turtle)
 {
-	if (!alst || !new)
-		return ;
-	while (*alst)
-		alst = &(*alst)->next;
-	*alst = new;
+	t_list *rabbit;
+
+	if (!turtle || !(turtle->next))
+		return (1);
+	rabbit = turtle->next->next;
+	while (turtle && rabbit)
+	{
+		if (!rabbit->next)
+			return (1);
+		rabbit = rabbit->next->next;
+		turtle = turtle->next;
+		if (turtle == rabbit)
+			return (0);
+	}
+	return (1);
 }

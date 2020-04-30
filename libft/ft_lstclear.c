@@ -13,7 +13,11 @@
 #include "libft.h"
 
 /*
-** note:	deletes element and all following ones: different from ft_lstdelone
+** note:	deletes link and all following ones: different from ft_lstdelone
+**
+** note:	this function can delete an linked list thats stucked in a loop.
+**			However the very first link has to be part of the loop.
+**			Refer to ft_lstloop_proof()
 **
 ** note:	if you want to delete from the middle of the list:
 **			-	it puts the pointer to NULL so it ends the list here.
@@ -23,15 +27,20 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*current;
-	t_list	*then;
+	t_list	**then;
+	t_list	**copy;
 
-	current = *lst;
-	while (current)
+	copy = lst;
+	if (*copy)
+		copy = &(*copy)->next;
+	while (*copy)
 	{
-		then = current->next;
-		ft_lstdelone(current, del);
-		current = then;
+		if ((*lst) == (*copy))
+			break ;
+		then = &(*copy)->next;
+		ft_lstdelone(*copy, del);
+		copy = then;
 	}
+	ft_lstdelone(*lst, del);
 	*lst = NULL;
 }
