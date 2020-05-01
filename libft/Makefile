@@ -31,6 +31,7 @@ BLACK_BG = \033[48;5;0m
 CLEAR_COLOR = \033[m
 NAME_BG = \033[48;5;39m 
 OBJECTS_BG = \033[48;5;121m
+COUNTER_FG = \033[38;5;121m
 BONUS_BG = \033[48;5;219m
 BONUS_FG = \033[38;5;219m
 ###############################################################################
@@ -116,6 +117,7 @@ FILES += lstnew\
 	lstclear\
 	lstdelone\
 	lstiter\
+	lstiter_cmp\
 	lstmap\
 	lstsize\
 	lstlast\
@@ -138,6 +140,8 @@ FILES += dlstnew\
 	dlstdel_back\
 	dlstdel_front\
 
+FILE_NUMBER=84
+FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
 ###############################################################################
@@ -157,7 +161,8 @@ $(NAME): $(OBJ) $(FT_H)
 
 $(OBJ): $(OBJ_PATH)%.o: %.c | $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@echo "$(CREAT_FG)>>......... $@$(CLEAR_FG)"
+	$(eval FILE_COUNTER=$(shell echo $$(($(FILE_COUNTER)+1))))
+	@echo " $(COUNTER_FG)[$(FILE_COUNTER)/$(FILE_NUMBER)] $(CREAT_FG)>>......... $@$(CLEAR_COLOR)"
 
 clean:
 	@echo "\t\t$(REMOVE_FG)deleting $(OBJECTS_BG)$(BLACK_FG)$(OBJ_PATH) $(BLACK_BG)$(REMOVE_FG) containing all the .o files for $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CLEAR_COLOR)"
