@@ -155,11 +155,11 @@ $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
 	@echo "\n\t\t$(CREAT_FG)Created the $(OBJECTS_BG)$(BLACK_FG) $@ $(BLACK_BG)$(CREAT_FG) repository for $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG)$(CLEAR_COLOR)\n"
 
-$(NAME): $(OBJ) $(FT_H)
+$(NAME): $(OBJ)
 	@ar -src $@ $(OBJ)
 	@echo "\n\t\t$(CREAT_FG)Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) has been created.$(CLEAR_COLOR)\n"
 
-$(OBJ): $(OBJ_PATH)%.o: %.c | $(OBJ_PATH)
+$(OBJ): $(OBJ_PATH)%.o: %.c $(FT_H) | $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 	$(eval FILE_COUNTER=$(shell echo $$(($(FILE_COUNTER)+1))))
 	@echo " $(COUNTER_FG)[$(FILE_COUNTER)/$(FILE_NUMBER)] $(CREAT_FG)>>......... $@$(CLEAR_COLOR)"
