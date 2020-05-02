@@ -14,9 +14,9 @@
 ########################## PARAMETERS #########################################
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-NAME = libft.a
+NAME = btree.a
 .PHONY = clean fclean re all bonus
-FT_H = ./libft.h
+FT_H = ./btree.h
 OBJ_PATH = ./objects/
 INCLUDE_PATH = ./
 I_FLAGS = -I $(INC_PATH)
@@ -38,112 +38,21 @@ BONUS_FG = \033[38;5;219m
 
 ###############################################################################
 ########################## SOURCE FILES #######################################
-# display
-FILES += putchar_fd\
-	putendl_fd\
-	putnbr_fd\
-	putstr_fd\
-	putbits_fd\
-	putbytes_fd\
+FILES = putchar_fd\
+		putstr_fd\
+		new\
+		add\
+		debug\
+		depth\
+		find\
+		apply_prefix\
+		apply_infix\
+		apply_suffix\
+		apply_bfs\
 
-# malloc / free
-FILES += calloc\
-	free\
-
-# memory manipulation
-FILES += bzero\
-	memset\
-	memccpy\
-	memchr\
-	memcmp\
-	memcpy\
-	memmove\
-	swap\
-
-# char ID related
-FILES += isalnum\
-	isalpha\
-	isascii\
-	isdigit\
-	isprint\
-	tolower\
-	toupper\
-
-# str
-FILES += strlen\
-	strcmp\
-	strncmp\
-	strchr\
-	strrchr\
-	strichr\
-	stristr\
-	strnstr\
-	strlcat\
-	strlcpy\
-	strrev\
-	atoi\
-	size_num_base_signed\
-
-# str + malloc
-FILES += strdup\
-	substr\
-	strjoin\
-	strcdel\
-	strcadd\
-	strappend\
-	strtrim\
-	itoa\
-	itoa_base\
-	strmapi\
-	stringify\
-	split\
-
-# char** manipulation
-FILES += array_dup\
-	array_free\
-	array_len\
-	array_debug\
-	array_add\
-	array_to_lst\
-
-# simple linked list
-FILES += lstnew\
-	lstadd_front\
-	lstadd_back\
-	lstadd_cmp\
-	lstdel_front\
-	lstdel_back\
-	lstdel_cmp\
-	lstuniq\
-	lstclear\
-	lstdelone\
-	lstiter\
-	lstiter_cmp\
-	lstmap\
-	lstsize\
-	lstlast\
-	lstfind\
-	lstget\
-	lstrev\
-	lstsort\
-	lstmerge\
-	lstloop_proof\
-	lst_to_dlst\
-
-# double linked list
-FILES += dlstnew\
-	dlstadd_back\
-	dlstadd_front\
-	dlstfirst\
-	dlstlast\
-	dlstclear\
-	dlstdelone\
-	dlstdel_back\
-	dlstdel_front\
-
-FILE_NUMBER=85
+FILE_NUMBER=11
 FILE_COUNTER=0
-SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
+SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
 ###############################################################################
 

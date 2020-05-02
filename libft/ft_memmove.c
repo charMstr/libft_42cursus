@@ -15,8 +15,7 @@
 /*
 ** /!\ original function not protected against passing NULL args
 **
-** note: no use of malloc here
-** RETURN: pointer in which is copied len bytes from src to dst*
+** RETURN: pointer in which is copied len bytes from *src to *dst
 */
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
