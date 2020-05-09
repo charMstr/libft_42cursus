@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_new.c                                        :+:      :+:    :+:   */
+/*   btree_right_rotation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,21 +13,26 @@
 #include "btree.h"
 
 /*
-** note:	this function will creat a new node. and place item in it.
+** note:	This function operates a right rotation on a given node.
+**			The root goes right and down, while the root->left child becomes
+**			new_root. If the root->left had a right child, it gets swaped to
+**			the other side, and becomes the left child of the new_root->right.
 **
-** return:	NULL if malloc failed
-**			new node ptr
+**	note:	the rotation is not performed if the root->right child is NULL.
 */
 
-t_btree			*btree_new(void	*item)
+void	btree_right_rotation(t_btree **root)
 {
-	t_btree	*new;
+	t_btree *new_root;
 
-	if (!(new = (t_btree*)malloc(sizeof(t_btree))))
-		return NULL;
-	new->parent = NULL;
-	new->left = NULL;
-	new->right = NULL;
-	new->item = item;
-	return (new);
+	if (!root || !*root || !(*root)->left)
+		return ;
+	new_root = (*root)->left;
+	new_root->parent = (*root)->parent;
+	(*root)->parent = new_root;
+	(*root)->left = new_root->right;
+	if (new_root->right)
+		new_root->right->parent = *root;
+	new_root->right = *root;
+	*root = new_root;
 }

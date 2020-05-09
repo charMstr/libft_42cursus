@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_new.c                                        :+:      :+:    :+:   */
+/*   btree_rb_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,21 +13,23 @@
 #include "btree.h"
 
 /*
-** note:	this function will creat a new node. and place item in it.
+** note:	this function will creat a new node. and place item in it. the node
+**			is of type red_black. its color is RB_RED.
 **
 ** return:	NULL if malloc failed
 **			new node ptr
 */
 
-t_btree			*btree_new(void	*item)
+t_rb_node	*btree_rb_new(void *item)
 {
-	t_btree	*new;
+	t_rb_node	*new;
 
-	if (!(new = (t_btree*)malloc(sizeof(t_btree))))
+	if (!(new = (t_rb_node*)malloc(sizeof(t_rb_node))))
 		return NULL;
 	new->parent = NULL;
 	new->left = NULL;
 	new->right = NULL;
 	new->item = item;
+	new->color = RB_RED;
 	return (new);
 }

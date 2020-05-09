@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_add.c                                        :+:      :+:    :+:   */
+/*   btree_make_item_uniq.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,11 +13,13 @@
 #include "btree.h"
 
 /*
-** note:	this function will insert a new node in the btree, the insertion
-**			position is decided with the cmp function. for each node, if cmp
-**			returns a negative value go left, if >= 0 go right.
+** note:	this function makes sure there is no more that one node
+**			containing an item macthing item_ref in the tree, according
+**			to cmp function. If there is more than one. del will remove
+**			node->item. and node will be freed.
 **
-** note:	node is a new node previously malloced.
+**	note:	refer to btree_rb_uniq() if you want to do the same operation
+**			in a red black tree.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del, btree_get(),
@@ -38,18 +40,16 @@
 **				...
 */
 
-void	btree_add(t_btree **root, t_btree *node, int (*cmp)(void *, void *))
+void	btree_make_item_uniq(t_btree **root, void *item_ref, \
+		int (*cmp)(void *, void *), void (*del)(void*))
 {
-	if (!root || !cmp || !node)
-		return;
-	if (!*root)
-	{
-		*root = node;
-		return;
-	}
-	node->parent = *root;
-	if (cmp(node->item, (*root)->item) < 0)
-		btree_add(&(*root)->left, node , cmp);
-	else
-		btree_add(&(*root)->right, node , cmp);
+	t_btree *uniq;
+
+	if (!cmp || !del || !root || !*root)
+		return ;
+	uniq = btree_get(root, item_ref, cmp);
+	if (!uniq)
+		return ;
+	btree_del(root, item_ref, cmp, del);
+	btree_add(root, uniq, cmp);
 }

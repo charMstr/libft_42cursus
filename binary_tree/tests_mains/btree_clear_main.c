@@ -30,15 +30,17 @@ void	display_func(void	*int_ptr)
 
 int	cmp_func(void *new_item, void *tree_item)
 {
-	if (!new_item && !tree_item)
-		return (0);
-	if (!new_item || !tree_item)
-		return (1);
 	if (*(int*)new_item < *(int*)tree_item)
 		return (-1);
 	if (*(int*)new_item > *(int*)tree_item)
 		return (1);
 	return (0);
+}
+
+void	free_node(void *node)
+{
+	free(node);
+	return ;
 }
 
 int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
@@ -60,9 +62,7 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	t_btree *node5;
 	t_btree *node6;
 	t_btree *node7;
-	t_btree *null_item0;
-	t_btree *null_item1;
-	t_btree *null_item2;
+	t_btree *returned;
 
 	root = NULL;
 	node0 = btree_new(&number0);
@@ -73,29 +73,18 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	node5 = btree_new(&number5);
 	node6 = btree_new(&number6);
 	node7 = btree_new(&number7);
-	null_item0 = btree_new(NULL);
-	null_item1 = btree_new(NULL);
-	null_item2 = btree_new(NULL);
 	//tests for NULL inputs.
 	btree_add(NULL, node3, cmp_func);
 	btree_add(&root, NULL, cmp_func);
 	btree_add(&root, node3, NULL);
 	ft_putstr_fd("\ntest null inputs: OK\n\n", 1);
 	//real tests
-	btree_add(&root, node5, cmp_func);
-	//btree_add(&root, null_item0, cmp_func);
-	printf("node5: %p\n", node5);
-	btree_add(&root, node1, cmp_func);
-	printf("node5->left: %p\n", node5->left);
-	printf("node1->parent: %p\n", node5->left->parent);
 	btree_add(&root, node3, cmp_func);
-	printf("node5->left->right: %p\n", node5->left->right);
-	printf("node3->parent: %p\n", node5->left->right->parent);
+	btree_add(&root, node1, cmp_func);
+	btree_add(&root, node5, cmp_func);
 	btree_add(&root, node4, cmp_func);
-	btree_add(&root, null_item1, cmp_func);
 	btree_add(&root, node7, cmp_func);
 	btree_add(&root, node6, cmp_func);
-	btree_add(&root, null_item2, cmp_func);
 	btree_add(&root, node2, cmp_func);
 	btree_add(&root, node0, cmp_func);
 	btree_add(&root, NULL, cmp_func);
@@ -103,13 +92,17 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	btree_add(&root, node0, NULL);
 
 	btree_debug(root, display_func);
-	btree_del(&root, node3->item, cmp_func, free);
+	btree_clear(&(root->left), free_node);
 	btree_debug(root, display_func);
-	btree_get(&root, null_item2->item, cmp_func);
-	btree_get(&root, node5->item, cmp_func);
-	btree_debug(root, display_func);
-	btree_del(&root, NULL, cmp_func, free);
-	btree_debug(root, display_func);
+	btree_clear(&root, free_node);
+	printf("now aftre clear, root is: %p\n", root);
 	printf("depth is %d\n", btree_depth(root));
+	/*
+	leaks ok
+	while (1)
+		;
+	*/
+
 	return (0);
 }
+

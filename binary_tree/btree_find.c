@@ -13,13 +13,29 @@
 #include "btree.h"
 
 /*
-** note:	this function will return the adress of the first item we meet,
-**			while browsing in a dfs infix manner.
+** note:	this function will return the adress of the first item within a
+**			node that we  meet while browsing in a dfs infix manner.
 **
-** note:	we consider the tree should not contain null items... so we return
-**			if item_ref is null.
+** note:	we return straight away if we are looking for node->item == NULL,
+**			because there is no point.
 **
-** note:	cumstom function cmp has a similar behavior to ft_strcmp().
+** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
+**			It is the exact same cmp function used with btree_del, btree_get(),
+**			btree_add() and btree_find(). and their red_black versions.
+**			It has to handle te case of NULL input, returning 0 if both inputs
+**			are NULL. or > 0  if the new_item , and < 0 if the current
+**			tree_item is NULL so that we keep null at the far right.
+**
+**			Therefore cmp's start should always look like this:
+**			int	cmp_func(void *new_item, void *tree_item)
+**			{
+**				if (!new_item && !tree_item)
+**					return (0);
+**				if (!new_item)
+**					return (1);
+**				if (!tree_item)
+**					return (-1);
+**				...
 */
 
  void	*btree_find(t_btree *root, void *item_ref, int (*cmp)(void *, void *))

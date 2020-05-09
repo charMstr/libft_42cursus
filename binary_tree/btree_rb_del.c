@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_add.c                                        :+:      :+:    :+:   */
+/*   btree_rb_del.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,11 +13,16 @@
 #include "btree.h"
 
 /*
-** note:	this function will insert a new node in the btree, the insertion
-**			position is decided with the cmp function. for each node, if cmp
-**			returns a negative value go left, if >= 0 go right.
+** note:	this function will delete any node in the red/black tree whose item
+**			is matching the item_ref, according to the cmp function.
 **
-** note:	node is a new node previously malloced.
+** note:	Refer to btree_rb_delone() if you want to delete only the first met
+**			node.
+**
+** note:	If item_ref is NULL, then all the nodes w/ a node->item NULL should
+**			be removed.
+**
+** note:	the del function will free the (void*)(node->item).
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del, btree_get(),
@@ -38,18 +43,14 @@
 **				...
 */
 
-void	btree_add(t_btree **root, t_btree *node, int (*cmp)(void *, void *))
+void		btree_rb_del(t_rb_node **root, void *item_ref, \
+		int (*cmp)(void *, void *), void (*del)(void*))
 {
-	if (!root || !cmp || !node)
-		return;
-	if (!*root)
+	t_rb_node *del_me;
+
+	while ((del_me = btree_rb_get(root, item_ref, cmp)))
 	{
-		*root = node;
-		return;
+		del(del_me->item);
+		free(del_me);
 	}
-	node->parent = *root;
-	if (cmp(node->item, (*root)->item) < 0)
-		btree_add(&(*root)->left, node , cmp);
-	else
-		btree_add(&(*root)->right, node , cmp);
 }

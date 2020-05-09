@@ -44,13 +44,31 @@ FILES = putchar_fd\
 		add\
 		debug\
 		depth\
+		size\
 		find\
+		get\
 		apply_prefix\
 		apply_infix\
 		apply_suffix\
 		apply_bfs\
+		clear\
+		del\
+		make_item_uniq\
+		make_nodes_uniq\
+		left_rotation\
+		right_rotation\
+		rb_new\
+		rb_add\
+		rb_debug\
+		rb_black_height\
+		rb_get\
+		rb_get_balance\
+		rb_delone\
+		rb_del\
+		rb_make_item_uniq\
+		rb_make_nodes_uniq\
 
-FILE_NUMBER=11
+FILE_NUMBER=29
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

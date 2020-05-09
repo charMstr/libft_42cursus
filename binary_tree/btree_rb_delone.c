@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_add.c                                        :+:      :+:    :+:   */
+/*   btree_rb_delone.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,11 +13,15 @@
 #include "btree.h"
 
 /*
-** note:	this function will insert a new node in the btree, the insertion
-**			position is decided with the cmp function. for each node, if cmp
-**			returns a negative value go left, if >= 0 go right.
+** note:	this function will delete first met node in the red/black tree,
+**			whose item is matching the item_ref, according to the cmp function.
+**			Refer to btree_rb_del() if you want to delete all the mactching
+**			nodes at once.
 **
-** note:	node is a new node previously malloced.
+** note:	if item_ref is NULL, then the first NULL node->item should be
+**			deleted.
+**
+** note:	the del function will free the (void*)(node->item).
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del, btree_get(),
@@ -38,18 +42,14 @@
 **				...
 */
 
-void	btree_add(t_btree **root, t_btree *node, int (*cmp)(void *, void *))
+void		btree_rb_delone(t_rb_node **root, void *item_ref, \
+		int (*cmp)(void *, void *), void (*del)(void*))
 {
-	if (!root || !cmp || !node)
-		return;
-	if (!*root)
-	{
-		*root = node;
-		return;
-	}
-	node->parent = *root;
-	if (cmp(node->item, (*root)->item) < 0)
-		btree_add(&(*root)->left, node , cmp);
-	else
-		btree_add(&(*root)->right, node , cmp);
+	t_rb_node *del_me;
+
+	del_me = btree_rb_get(root, item_ref, cmp);
+	if (!del_me)
+		return ;
+	del(del_me->item);
+	free(del_me);
 }

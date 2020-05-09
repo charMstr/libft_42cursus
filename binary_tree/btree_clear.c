@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_new.c                                        :+:      :+:    :+:   */
+/*   btree_clear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,21 +13,19 @@
 #include "btree.h"
 
 /*
-** note:	this function will creat a new node. and place item in it.
+** note:	this function will free the complete btree from the given root node
+**			thanks to the custom free_func().
 **
-** return:	NULL if malloc failed
-**			new node ptr
+** note:	the del func will have to free the node->item.
 */
 
-t_btree			*btree_new(void	*item)
+void	 btree_clear(t_btree **root, void (*del)(void*))
 {
-	t_btree	*new;
-
-	if (!(new = (t_btree*)malloc(sizeof(t_btree))))
-		return NULL;
-	new->parent = NULL;
-	new->left = NULL;
-	new->right = NULL;
-	new->item = item;
-	return (new);
+	if (!root || !*root || !del)
+		return ;
+	btree_clear(&(*root)->left, del);
+	btree_clear(&(*root)->right, del);
+	del((*root)->item);
+	free(*root);
+	*root = NULL;
 }
