@@ -67,8 +67,9 @@ FILES = putchar_fd\
 		rb_del\
 		rb_make_item_uniq\
 		rb_make_nodes_uniq\
+		rb_subtree\
 
-FILE_NUMBER=29
+FILE_NUMBER=30
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

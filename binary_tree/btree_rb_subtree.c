@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_rb_get.c                                     :+:      :+:    :+:   */
+/*   btree_rb_subtree.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,25 @@
 
 #include "btree.h"
 
-static t_rb_node	*btree_rb_get_assist(t_rb_node **root, t_rb_node *current,\
-		void *item_ref, int (*cmp)(void *, void *));
-static void	btree_rb_get_either_is_red(t_rb_node **root, \
+typedef struct		s_cmp_min_max
+{
+	int				(*cmp)(void *, void *);
+	void			*item_min;
+	void			*item_max;
+}					t_cmp_min_max;
+
+static t_rb_node	*btree_rb_subtree_assist(t_rb_node **root, \
+		t_rb_node *current, t_cmp_min_max *min_max);
+static void			btree_rb_get_either_is_red(t_rb_node **root, \
 		t_rb_node *current);
-static t_rb_node *btree_rb_get_node_two_child(t_rb_node **root, \
+static				t_rb_node *btree_rb_get_node_two_child(t_rb_node **root, \
 		t_rb_node *current);
 
 /*
-** note:	this function will extract any node in the red/black tree whose
-**			item is matching the item_ref, according to the cmp function.
-**
-** note:	the nodes->color is reset to red. and all its relatives to NULL.
-**
-** note:	if item_ref is NULL, then the first node w/ a node->item NULL will
-**			be extracted/returned.
+** note:	This function is similar to the btree_rb_get() function.But It will
+**			extract from the red/black tree ALL the nodes that are greater or
+**			equal to item_ref_min and lower or equal to item_ref_max,
+**			according to the cmp function, and place them in a new subtree.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del, btree_get(),
@@ -45,39 +49,54 @@ static t_rb_node *btree_rb_get_node_two_child(t_rb_node **root, \
 **				if (!tree_item)
 **					return (-1);
 **				...
+**
+** note:	In our case setting item_ref_max to NULL will include the nodes
+**			from item_ref_min up to NULL items as well.
+**			setting item_ref_min to NULL will include only nodes containing
+**			NULL->items.
+**
+** RETURN:	new subtree. the old tree is cut off.
+**			NULL if nothing was removed from the old red black btree..
 */
 
-t_rb_node			*btree_rb_get(t_rb_node **root, void *item_ref, \
-		int (*cmp)(void *, void *))
+t_rb_node			*btree_rb_subtree(t_rb_node **root, void *item_ref_min, \
+		void *item_ref_max, int (*cmp)(void *, void *))
 {
-	t_rb_node *extracted;
+	t_rb_node 		*extracted;
+	t_rb_node 		*subtree;
+	t_cmp_min_max	cmp_min_max;
 
+	subtree = NULL;
 	if (!root || !*root || !cmp)
 		return (NULL);
-	extracted = btree_rb_get_assist(root, *root, item_ref, cmp);
-	if (extracted)
+	cmp_min_max.cmp = cmp;
+	cmp_min_max.item_min = item_ref_min;
+	cmp_min_max.item_max = item_ref_max;
+	while ((extracted = btree_rb_subtree_assist(root, *root, &cmp_min_max)))
 	{
-		extracted->color = RB_RED;
 		extracted->parent = NULL;
 		extracted->left = NULL;
 		extracted->right = NULL;
+		extracted->color = RB_RED;
+		btree_rb_add(&subtree, extracted, cmp);
 	}
-	return (extracted);
+	return (subtree);
 }
 
 /*
-** note:	this function is there so that we can recurse without never
-**			modifying the address of root
+** note:	this assisting function will recurse and move from a node to
+**			another, while not modifying root unless necessary.
 */
 
-static t_rb_node	*btree_rb_get_assist(t_rb_node **root, t_rb_node *current,\
-		void *item_ref, int (*cmp)(void *, void *))
+static t_rb_node	*btree_rb_subtree_assist(t_rb_node **root, \
+		t_rb_node *current, t_cmp_min_max *cmp_min_max)
 {
 	t_rb_node	*res;
 
 	if (!*root || !current)
 		return (NULL);
-	if (!cmp(item_ref , current->item))
+	if (cmp_min_max->cmp(cmp_min_max->item_min , current->item) <= 0 \
+			&& cmp_min_max->cmp(cmp_min_max->item_max , current->item) >= 0)
 	{
 		res = current;
 		if (current->left && current->right)
@@ -90,8 +109,8 @@ static t_rb_node	*btree_rb_get_assist(t_rb_node **root, t_rb_node *current,\
 			btree_rb_get_balance(root, current, 1);
 		return (res);
 	}
-	if (!(res = btree_rb_get_assist(root, current->left, item_ref, cmp)))
-		res = btree_rb_get_assist(root, current->right, item_ref, cmp);
+	if (!(res = btree_rb_subtree_assist(root, current->left, cmp_min_max)))
+		res = btree_rb_subtree_assist(root, current->right, cmp_min_max);
 	return (res);
 }
 
@@ -100,7 +119,7 @@ static t_rb_node	*btree_rb_get_assist(t_rb_node **root, t_rb_node *current,\
 **			extracted is red, or its children is red.
 */
 
-static void	btree_rb_get_either_is_red(t_rb_node **root, \
+static void		btree_rb_get_either_is_red(t_rb_node **root, \
 		t_rb_node *current)
 {
 	t_rb_node *red_child;
@@ -129,7 +148,7 @@ static void	btree_rb_get_either_is_red(t_rb_node **root, \
 **			effectively (now containing the item we wanted to delete).
 */
 
-static t_rb_node *btree_rb_get_node_two_child(t_rb_node **root, \
+static t_rb_node	*btree_rb_get_node_two_child(t_rb_node **root, \
 		t_rb_node *current)
 {
 	void		*get_me_item;
