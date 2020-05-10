@@ -94,5 +94,7 @@ void			btree_rb_make_item_uniq(t_rb_node **root, void *item_ref, \
 			int (*cmp)(void *, void *), void (*del)(void*));
 void			btree_rb_make_nodes_uniq(t_rb_node **root, \
 			int (*cmp)(void *, void *), void (*del)(void *));
+t_rb_node		*btree_rb_subtree(t_rb_node **root, void *item_ref_min, \
+			void *item_ref_max, int (*cmp)(void *, void *));
 
 #endif
