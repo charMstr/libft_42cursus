@@ -32,13 +32,31 @@ int	cmp_func(void *new_item, void *tree_item)
 {
 	if (!new_item && !tree_item)
 		return (0);
-	if (!new_item || !tree_item)
+	if (!new_item)
 		return (1);
+	if (!tree_item)
+		return (-1);
 	if (*(int*)new_item < *(int*)tree_item)
 		return (-1);
 	if (*(int*)new_item > *(int*)tree_item)
 		return (1);
 	return (0);
+}
+
+void	free_func(void *item)
+{
+	(void)item;
+}
+
+int apply_func(void *item)
+{
+	int *it;
+
+	it = (int*)item;
+	if (!it)
+		return (1);
+	*it = *it + 9000;
+	return (1);
 }
 
 int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
@@ -63,6 +81,9 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	t_btree *null_item0;
 	t_btree *null_item1;
 	t_btree *null_item2;
+	t_btree_range range;
+	int		num_max;
+	int		num_min;
 
 	root = NULL;
 	node0 = btree_new(&number0);
@@ -101,15 +122,17 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	btree_add(&root, NULL, cmp_func);
 	btree_add(NULL, node0, cmp_func);
 	btree_add(&root, node0, NULL);
+	btree_debug(root, display_func);
 
-	btree_debug(root, display_func);
-	btree_del(&root, node3->item, cmp_func, free);
-	btree_debug(root, display_func);
-	btree_get(&root, null_item2->item, cmp_func);
-	btree_get(&root, node5->item, cmp_func);
-	btree_debug(root, display_func);
-	btree_del(&root, NULL, cmp_func, free);
+	printf("\033[32mstarting the apply_range func:\033[m\n");
+	range.item_ref_min = &num_min;
+	range.item_ref_max = &num_max;
+	num_min = 2;
+	num_max = 6;
+
+	btree_apply_range(&root, &range, cmp_func, apply_func);
 	btree_debug(root, display_func);
 	printf("depth is %d\n", btree_depth(root));
 	return (0);
 }
+

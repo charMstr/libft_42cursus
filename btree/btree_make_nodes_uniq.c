@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_rb_make_nodes_uniq.c                         :+:      :+:    :+:   */
+/*   btree_make_nodes_uniq.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,9 +17,10 @@
 **			containing the same item, according to cmp function. If there is
 **			more than one. del will remove node->item. and node will be freed.
 **
-**	note:	refer to btree_uniq() if you want to do the same operation
-**			in a normal binary search tree (non red/black).
-**	note:	refer to btree_rb_make_item_uniq() if you want to do the same on
+**	note:	refer to btree_rb_make_nodes_uniq() if you want to do the same
+**			operation in a red / black tree.
+**
+**	note:	refer to btree_make_item_uniq() if you want to do the same on
 **			a single item_ref.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
@@ -41,20 +42,20 @@
 **				...
 */
 
-void	btree_rb_make_nodes_uniq(t_rb_node **root, int (*cmp)(void *, void *),\
+void	btree_make_nodes_uniq(t_btree **root, int (*cmp)(void *, void *),\
 		void (*del)(void *))
 {
-	t_rb_node *new_root;
-	t_rb_node *new_node;
+	t_btree *new_root;
+	t_btree *new_node;
 
 	new_root = NULL;
 	if (!root || !*root || !cmp || !del)
 		return ;
 	while (*root)
 	{
-		new_node = btree_rb_get(root, (*root)->item, cmp);
-		btree_rb_del(root, new_node->item, cmp, del);
-		btree_rb_add(&new_root, new_node, cmp);
+		new_node = btree_getnode(root, (*root)->item, cmp);
+		btree_del(root, new_node->item, cmp, del);
+		btree_add(&new_root, new_node, cmp);
 	}
 	*root = new_root;
 }

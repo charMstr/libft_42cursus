@@ -46,7 +46,7 @@ FILES = putchar_fd\
 		depth\
 		size\
 		find\
-		get\
+		getnode\
 		apply_prefix\
 		apply_infix\
 		apply_suffix\
@@ -61,15 +61,19 @@ FILES = putchar_fd\
 		rb_add\
 		rb_debug\
 		rb_black_height\
-		rb_get\
 		rb_get_balance\
+		rb_getnode\
+		rb_getnode_range\
+		rb_apply_range\
 		rb_delone\
 		rb_del\
+		rb_del_range\
 		rb_make_item_uniq\
 		rb_make_nodes_uniq\
-		rb_subtree\
+		getnode_range\
+		apply_range\
 
-FILE_NUMBER=30
+FILE_NUMBER=34
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

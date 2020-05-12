@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_rb_delone.c                                  :+:      :+:    :+:   */
+/*   btree_make_item_uniq.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,15 +13,13 @@
 #include "btree.h"
 
 /*
-** note:	this function will delete first met node in the red/black tree,
-**			whose item is matching the item_ref, according to the cmp function.
-**			Refer to btree_rb_del() if you want to delete all the mactching
-**			nodes at once.
+** note:	this function makes sure there is no more that one node
+**			containing an item macthing item_ref in the tree, according
+**			to cmp function. If there is more than one. del will remove
+**			node->item. and node will be freed.
 **
-** note:	if item_ref is NULL, then the first NULL node->item should be
-**			deleted.
-**
-** note:	the del function will free the (void*)(node->item).
+**	note:	refer to btree_rb_uniq() if you want to do the same operation
+**			in a red black tree.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del, btree_get(),
@@ -42,14 +40,16 @@
 **				...
 */
 
-void		btree_rb_delone(t_rb_node **root, void *item_ref, \
+void	btree_make_item_uniq(t_btree **root, void *item_ref, \
 		int (*cmp)(void *, void *), void (*del)(void*))
 {
-	t_rb_node *del_me;
+	t_btree *uniq;
 
-	del_me = btree_rb_get(root, item_ref, cmp);
-	if (!del_me)
+	if (!cmp || !del || !root || !*root)
 		return ;
-	del(del_me->item);
-	free(del_me);
+	uniq = btree_getnode(root, item_ref, cmp);
+	if (!uniq)
+		return ;
+	btree_del(root, item_ref, cmp, del);
+	btree_add(root, uniq, cmp);
 }
