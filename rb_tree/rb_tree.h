@@ -76,12 +76,14 @@ void			rb_tree_get_balance(t_rb_node **root, t_rb_node *current,\
 int				rb_tree_size(t_rb_node *root);
 
 /*
-** adding nodes.
+** adding nodes/creat tree.
 */
 
 t_rb_node		*rb_tree_new(void *item);
 void			rb_tree_add(t_rb_node **root, t_rb_node *node, \
 			int (*cmp)(void *, void *));
+t_rb_node		*rb_tree_dup(t_rb_node *root, void *(*dup_item)(void *), \
+			void (*del)(void *));
 
 /*
 ** deleting functions

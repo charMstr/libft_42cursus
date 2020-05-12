@@ -18,8 +18,11 @@
 **			inferior or equal to item_ref_max, according to cmp func.
 **			browsing is infix first.
 **
-** note:	refer to rb_tree_apply_range() if you dont operate on a red_black
-**			tree.
+** note:	if the rb_tree_apply_infix returns zero (failure), it means allong
+**			the way it stops applying the function onto the node->items of the
+**			red/black tree. all the nodes extracted into the subtree are still
+**			reinserted into the root tree and it is the responsability of the
+**			the user to exit/free the root tree.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with rb_tree_del,

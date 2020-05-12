@@ -49,6 +49,7 @@ FILES = putchar_fd\
 		size\
 		new\
 		add\
+		dup\
 		clear\
 		delone\
 		del\
@@ -62,7 +63,7 @@ FILES = putchar_fd\
 		apply_prefix\
 		apply_range\
 
-FILE_NUMBER=23
+FILE_NUMBER=24
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)rb_tree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
