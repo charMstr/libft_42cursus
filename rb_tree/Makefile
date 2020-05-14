@@ -59,8 +59,8 @@ FILES = putchar_fd\
 		find\
 		getnode\
 		getnode_range\
-		apply_infix\
-		apply_prefix\
+		apply_preorder\
+		apply_inorder\
 		apply_range\
 
 FILE_NUMBER=24

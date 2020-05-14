@@ -116,8 +116,8 @@ t_rb_node		*rb_tree_getnode_range(t_rb_node **root, \
 ** apply functions
 */
 
-int				rb_tree_apply_prefix(t_rb_node *root, int (*applyf)(void *));
-int				rb_tree_apply_infix(t_rb_node *root, int (*applyf)(void *));
+int				rb_tree_apply_inorder(t_rb_node *root, int (*applyf)(void *));
+int				rb_tree_apply_preorder(t_rb_node *root, int (*applyf)(void *));
 int				rb_tree_apply_range(t_rb_node **root, t_rb_tree_range *range, \
 			int (*cmp)(void *, void *), int (*applyf)(void *));
 

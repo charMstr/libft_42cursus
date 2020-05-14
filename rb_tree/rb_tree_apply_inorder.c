@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rb_tree_apply_prefix.c                             :+:      :+:    :+:   */
+/*   rb_tree_apply_inorder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,20 +13,20 @@
 #include "rb_tree.h"
 
 /*
-** note:	this functionn will apply a callback func to every item of a
-**			rb_tree. Browsing is prefix first.
+** note:	this function will apply a callback func to every item of a
+**			rb_tree. Browsing is inorder(first is LEFT, then ROOT, then RIGHT).
 **
 ** RETURN:	1 ok
 **			something failed in the callback function.
 */
 
-int	rb_tree_apply_prefix(t_rb_node *root, int (*applyf)(void *))
+int	rb_tree_apply_inorder(t_rb_node *root, int (*applyf)(void *))
 {
-	if (root && !rb_tree_apply_prefix(root->left, applyf))
+	if (root && !rb_tree_apply_inorder(root->left, applyf))
 		return (0);
 	if (root && !applyf(root->item))
 		return (0);
-	if (root && !rb_tree_apply_prefix(root->right, applyf))
+	if (root && !rb_tree_apply_inorder(root->right, applyf))
 		return (0);
 	return (1);
 }

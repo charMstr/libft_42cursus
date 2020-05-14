@@ -16,10 +16,10 @@
 ** note:	this functionn will apply a callback func to every item of a
 **			red/black tree node that is superior or equal to item_ref_min, and
 **			inferior or equal to item_ref_max, according to cmp func.
-**			browsing is infix first.
+**			browsing is preorder(first is root, then left, then right).
 **
-** note:	if the rb_tree_apply_infix returns zero (failure), it means allong
-**			the way it stops applying the function onto the node->items of the
+** note:	if the rb_tree_apply_preorder returns zero (fail), it means allong
+**			the way it stoped applying the function onto the node->items of the
 **			red/black tree. all the nodes extracted into the subtree are still
 **			reinserted into the root tree and it is the responsability of the
 **			the user to exit/free the root tree.
@@ -65,7 +65,7 @@ int			rb_tree_apply_range(t_rb_node **root, t_rb_tree_range *range, \
 		rb_tree_add(&subtree, extracted, cmp);
 	if (!subtree)
 		return (1);
-	res = rb_tree_apply_infix(subtree, applyf);
+	res = rb_tree_apply_preorder(subtree, applyf);
 	while (subtree && (extracted = rb_tree_getnode(&subtree, \
 			subtree->item, cmp)))
 	{

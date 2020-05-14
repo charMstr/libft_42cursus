@@ -11,18 +11,18 @@ int	display_func(void	*int_ptr)
 	char *str;
 
 	glob++;
-	if (glob == 10)
+	if (glob == 6)
 	{
 		printf("escape!\n");
 		return (0);
 	}
 	i = 0;
+	a = (int*)int_ptr;
 	if (!a)
 	{
 		ft_putstr_fd("[null]", 1);
 		return (1);
 	}
-	a = (int*)int_ptr;
 	if (!(str = ft_itoa(*a)))
 		return (0);
 	ft_putchar_fd('[', 1);
@@ -65,7 +65,6 @@ void	 display_func_debug(void	*int_ptr)
 	free(str);
 }
 
-
 int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 {
 	int		number0 = 0;
@@ -100,12 +99,11 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	node6 = rb_tree_new(&number6);
 	node4->right = node6;
 	node7 = rb_tree_new(&number7);
-	//node6->left = node7;
+	node6->left = node7;
 
 	rb_tree_debug(root, display_func_debug);
-	res = rb_tree_apply_prefix(root, display_func);
-	printf("res is: %d\n", res);
+	res = rb_tree_apply_preorder(root, display_func);
+	printf("res is %d\n", res);
 	printf("depth is %d\n", rb_tree_depth(root));
-	//ok
 	return (0);
 }
