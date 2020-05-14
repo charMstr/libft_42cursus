@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_right_rotation.c                             :+:      :+:    :+:   */
+/*   bstree_depth.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	This function operates a right rotation on a given node.
-**			The root goes right and down, while the root->left child becomes
-**			new_root. If the root->left had a right child, it gets swaped to
-**			the other side, and becomes the left child of the new_root->right.
+** note:	this function will Return the max depth of the binary tree.
+** note:	if the arg is null, the depth is 0, if there is only one node: 1
 **
-**	note:	the rotation is not performed if the root->right child is NULL.
+** RETURN:	depth
+**			0 if NULL input.
 */
 
-void	btree_right_rotation(t_btree **root)
+static void	bstree_depth_assist(t_bstree *node, int *max_depth, int depth)
 {
-	t_btree *new_root;
-
-	if (!root || !*root || !(*root)->left)
+	if (!node)
 		return ;
-	new_root = (*root)->left;
-	new_root->parent = (*root)->parent;
-	(*root)->parent = new_root;
-	(*root)->left = new_root->right;
-	if (new_root->right)
-		new_root->right->parent = *root;
-	new_root->right = *root;
-	*root = new_root;
+	if (*max_depth < ++depth)
+		(*max_depth)++;
+	bstree_depth_assist(node->left, max_depth, depth);
+	bstree_depth_assist(node->right, max_depth, depth);
+}
+
+int			bstree_depth(t_bstree *root)
+{
+	int max_depth;
+
+	max_depth = 0;
+	bstree_depth_assist(root, &max_depth, 0);
+	return (max_depth);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_del.c                                        :+:      :+:    :+:   */
+/*   bstree_del.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
 ** note:	this function will delete any node in the tree whose item is
@@ -22,8 +22,8 @@
 ** note:	the del function will free the (void*)(node->item).
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
-**			It is the exact same cmp function used with btree_del, btree_get(),
-**			btree_add() and btree_find(). and their red_black versions.
+**			It is the exact same cmp function used with bstree_del, bstree_get,
+**			bstree_add() and bstree_find(). and their red_black versions.
 **			It has to handle te case of NULL input, returning 0 if both inputs
 **			are NULL. or > 0  if the new_item , and < 0 if the current
 **			tree_item is NULL so that we keep null at the far right.
@@ -40,37 +40,37 @@
 **				...
 */
 
-static void	btree_del_node_no_child(t_btree **root, void(*del)(void*));
-static void	btree_del_node_one_child(t_btree **root, void(*del)(void*));
-static void	btree_del_node_two_child(t_btree **root, void(*del)(void*));
+static void	bstree_del_node_no_child(t_bstree **root, void(*del)(void*));
+static void	bstree_del_node_one_child(t_bstree **root, void(*del)(void*));
+static void	bstree_del_node_two_child(t_bstree **root, void(*del)(void*));
 
-void	btree_del(t_btree **root, void *item_ref, int (*cmp)(void *, void *), \
-		void (*del)(void*))
+void	bstree_del(t_bstree **root, void *item_ref, \
+		int (*cmp)(void *, void *), void (*del)(void*))
 {
 	if (!root || !*root || !cmp || !del)
 		return ;
 	if (!cmp(item_ref , (*root)->item))
 	{
 		if (!(*root)->left && !(*root)->right)
-			btree_del_node_no_child(root, del);
+			bstree_del_node_no_child(root, del);
 		else if ((*root)->left && (*root)->right)
-			btree_del_node_two_child(root, del);
+			bstree_del_node_two_child(root, del);
 		else
-			btree_del_node_one_child(root, del);
-		btree_del(root, item_ref, cmp, del);
+			bstree_del_node_one_child(root, del);
+		bstree_del(root, item_ref, cmp, del);
 		return ;
 	}
-	btree_del(&(*root)->left, item_ref, cmp, del);
-	btree_del(&(*root)->right, item_ref, cmp, del);
+	bstree_del(&(*root)->left, item_ref, cmp, del);
+	bstree_del(&(*root)->right, item_ref, cmp, del);
 }
 
 /*
 ** note:	this function is called when the node to be deleted has no childs.
 */
 
-static void	btree_del_node_no_child(t_btree **root, void(*del)(void*))
+static void	bstree_del_node_no_child(t_bstree **root, void(*del)(void*))
 {
-	t_btree *del_me;
+	t_bstree *del_me;
 
 	del_me = *root;
 	del(del_me->item);
@@ -87,10 +87,10 @@ static void	btree_del_node_no_child(t_btree **root, void(*del)(void*))
 **			child. the child goes up.
 */
 
-static void	btree_del_node_one_child(t_btree **root, void(*del)(void*))
+static void	bstree_del_node_one_child(t_bstree **root, void(*del)(void*))
 {
-	t_btree *child;
-	t_btree *del_me;
+	t_bstree *child;
+	t_bstree *del_me;
 
 	del_me = *root;
 	if (del_me->right)
@@ -115,10 +115,10 @@ static void	btree_del_node_one_child(t_btree **root, void(*del)(void*))
 **			effectively.
 */
 
-static void	btree_del_node_two_child(t_btree **root, void(*del)(void*))
+static void	bstree_del_node_two_child(t_bstree **root, void(*del)(void*))
 {
 	void	*del_me_item;
-	t_btree *del_me_node;
+	t_bstree *del_me_node;
 
 	del_me_node = *root;
 	del_me_item = del_me_node->item;
@@ -128,7 +128,7 @@ static void	btree_del_node_two_child(t_btree **root, void(*del)(void*))
 	del_me_node->item = (*root)->item;
 	(*root)->item = del_me_item;
 	if (!(*root)->left && !(*root)->right)
-		btree_del_node_no_child(root, del);
+		bstree_del_node_no_child(root, del);
 	else
-		btree_del_node_one_child(root, del);
+		bstree_del_node_one_child(root, del);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_add.c                                        :+:      :+:    :+:   */
+/*   bstree_make_nodes_uniq.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	this function will insert a new node in the btree, the insertion
-**			position is decided with the cmp function. for each node, if cmp
-**			returns a negative value go left, if >= 0 go right.
+** note:	this function makes sure that in the entire tree there no two node
+**			containing the same item, according to cmp function. If there is
+**			more than one. del will remove node->item. and node will be freed.
 **
-** note:	node is a new node previously malloced.
+**	note:	refer to bstree_rb_make_nodes_uniq() if you want to do the same
+**			operation in a red / black tree.
+**
+**	note:	refer to bstree_make_item_uniq() if you want to do the same on
+**			a single item_ref.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
-**			It is the exact same cmp function used with btree_del, btree_get(),
-**			btree_add() and btree_find(). and their red_black versions.
+**			It is the exact same cmp function used with bstree_del, bstree_get,
+**			bstree_add() and bstree_find(). and their red_black versions.
 **			It has to handle te case of NULL input, returning 0 if both inputs
 **			are NULL. or > 0  if the new_item , and < 0 if the current
 **			tree_item is NULL so that we keep null at the far right.
@@ -38,18 +42,20 @@
 **				...
 */
 
-void	btree_add(t_btree **root, t_btree *node, int (*cmp)(void *, void *))
+void	bstree_make_nodes_uniq(t_bstree **root, int (*cmp)(void *, void *),\
+		void (*del)(void *))
 {
-	if (!root || !cmp || !node)
-		return;
-	if (!*root)
+	t_bstree *new_root;
+	t_bstree *new_node;
+
+	new_root = NULL;
+	if (!root || !*root || !cmp || !del)
+		return ;
+	while (*root)
 	{
-		*root = node;
-		return;
+		new_node = bstree_getnode(root, (*root)->item, cmp);
+		bstree_del(root, new_node->item, cmp, del);
+		bstree_add(&new_root, new_node, cmp);
 	}
-	node->parent = *root;
-	if (cmp(node->item, (*root)->item) < 0)
-		btree_add(&(*root)->left, node , cmp);
-	else
-		btree_add(&(*root)->right, node , cmp);
+	*root = new_root;
 }

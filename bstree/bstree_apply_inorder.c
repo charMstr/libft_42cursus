@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_postorder.c                            :+:      :+:    :+:   */
+/*   bstree_apply_inorder.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	this functionn will apply a callback func to every item of a btree.
-**			browsing is postorder. (first is LEFT, then RIGHT, then ROOT)
+** note:	this function will apply a callback func to every item of a bstree.
+**			browsing is inorder (first is LEFT, then ROOT, then RIGHT)
+**
+** RETURN:	1 ok
+**			something failed in the callback function.
 */
 
-int	btree_apply_postorder(t_btree *root, int (*applyf)(void *))
+int	bstree_apply_inorder(t_bstree *root, int (*applyf)(void *))
 {
-	if (root && !btree_apply_postorder(root->left, applyf))
-		return (0);
-	if (root && !btree_apply_postorder(root->right, applyf))
+	if (root && !bstree_apply_inorder(root->left, applyf))
 		return (0);
 	if (root && !applyf(root->item))
+		return (0);
+	if (root && !bstree_apply_inorder(root->right, applyf))
 		return (0);
 	return (1);
 }

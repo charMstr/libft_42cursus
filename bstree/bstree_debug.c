@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_debug.c                                      :+:      :+:    :+:   */
+/*   bstree_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	This debugging function will display the btree in a tree fashion.
+** note:	This debugging function will display the bstree in a tree fashion.
 **
 ** note:	The custom display func takes care of displaying the item of a node
 **			represented as a string of SIZE_LEAF_DEBUG characters maximum,
@@ -29,7 +29,7 @@
 */
 
 /*
-**	int	max;		//max depth of the btree
+**	int	max;		//max depth of the bstree
 **	int	current;	//current depth while recursing
 **	int	bottom;		//current is trying to reach bottom while doing a bfs.
 */
@@ -41,7 +41,8 @@ typedef struct	s_depth
 	int			bottom;
 }				t_depth;
 
-static	void	btree_debug2(t_btree *node, t_depth depths, void (*display)())
+static	void	bstree_debug2(t_bstree *node, t_depth depths, \
+		void (*display)())
 {
 	int	size_line;
 	int	i;
@@ -52,43 +53,43 @@ static	void	btree_debug2(t_btree *node, t_depth depths, void (*display)())
 	if (!node)
 	{
 		while (i++ < size_line)
-			btree_putchar_fd(' ', 1);
+			bstree_putchar_fd(' ', 1);
 		return ;
 	}
 	if (depths.current == depths.bottom)
 	{
 		while (i++ < (size_line - SIZE_LEAF_DEBUG) / 2)
-			btree_putchar_fd(' ', 1);
+			bstree_putchar_fd(' ', 1);
 		display(node->item);
 		while (i++ <= (size_line - SIZE_LEAF_DEBUG))
-			btree_putchar_fd(' ', 1);
+			bstree_putchar_fd(' ', 1);
 		return ;
 	}
-	btree_debug2(node->left, depths, display);
-	btree_debug2(node->right, depths, display);
+	bstree_debug2(node->left, depths, display);
+	bstree_debug2(node->right, depths, display);
 }
 
-void	btree_debug(t_btree *root, void (*display)())
+void	bstree_debug(t_bstree *root, void (*display)())
 {
 	t_depth	depths;
 
-	btree_putstr_fd("\n======================================================"\
-			"=========================\n======================== BTREE DEBUG "\
-			"START ====================================\n", 1);
+	bstree_putstr_fd("\n====================================================="\
+			"==========================\n======================= BTREE DEBUG "\
+			"START =====================================\n", 1);
 	if (root && display)
 	{
-		depths.max = btree_depth(root);
+		depths.max = bstree_depth(root);
 		depths.current = 0;
 		depths.bottom = 0;
 		while (++depths.bottom <= depths.max)
 		{
-			btree_debug2(root, depths, display);
-			btree_putchar_fd('\n', 1);
+			bstree_debug2(root, depths, display);
+			bstree_putchar_fd('\n', 1);
 		}
 	}
 	else
-		btree_putstr_fd("NULL ROOT, or NULL display func\n", 1);
-	btree_putstr_fd("\n============================== DEBUG END ============="\
-			"=========================\n====================================="\
-			"==========================================\n\n\n", 1);
+		bstree_putstr_fd("NULL ROOT, or NULL display func\n", 1);
+	bstree_putstr_fd("\n============================== DEBUG END ============"\
+			"==========================\n===================================="\
+			"===========================================\n\n\n", 1);
 }

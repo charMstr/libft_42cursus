@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_range.c                                :+:      :+:    :+:   */
+/*   bstree_apply_range.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
 ** note:	this functionn will apply a callback func to every item of a tree
@@ -23,11 +23,11 @@
 **			always respect the cmp func order.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
-**			It is the exact same cmp function used with btree_del,
-**			btree_getnode(), btree_add() and btree_find(). and their red_black
-**			versions. It has to handle te case of NULL input, returning 0 if
-**			both inputs are NULL. or > 0  if the new_item , and < 0 if the
-**			current tree_item is NULL so that we keep null at the far right.
+**			It is the exact same cmp function used with bstree_del,
+**			bstree_getnode(), bstree_add() and bstree_find().
+**			It has to handle te case of NULL input, returning 0 if both inputs
+**			are NULL. or > 0  if the new_item , and < 0 if the current
+**			tree_item is NULL so that we keep null at the far right.
 **
 **			Therefore cmp's start should always look like this:
 **			int	cmp_func(void *new_item, void *tree_item)
@@ -49,25 +49,25 @@
 **			0 if failure in callback function. or NULL function pointer.
 */
 
-int			btree_apply_range(t_btree **root, t_btree_range *range, \
+int			bstree_apply_range(t_bstree **root, t_bstree_range *range, \
 		int (*cmp)(void *, void *), int (*applyf)(void *))
 {
-	t_btree *subtree;
-	t_btree *extracted;
+	t_bstree *substree;
+	t_bstree *extracted;
 	int res;
 
 	if (!range || !cmp || !applyf)
 		return (0);
-	subtree = NULL;
-	while ((extracted = btree_getnode_range(root, range, cmp)))
-		btree_add(&subtree, extracted, cmp);
-	if (!subtree)
+	substree = NULL;
+	while ((extracted = bstree_getnode_range(root, range, cmp)))
+		bstree_add(&substree, extracted, cmp);
+	if (!substree)
 		return (1);
-	res = btree_apply_preorder(subtree, applyf);
-	while (subtree \
-			&& (extracted = btree_getnode(&subtree, subtree->item, cmp)))
+	res = bstree_apply_preorder(substree, applyf);
+	while (substree \
+			&& (extracted = bstree_getnode(&substree, substree->item, cmp)))
 	{
-		btree_add(root, extracted, cmp);
+		bstree_add(root, extracted, cmp);
 	}
 	return (res);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_depth.c                                      :+:      :+:    :+:   */
+/*   bstree_right_rotation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,31 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	this function will Return the max depth of the binary tree.
-** note:	if the arg is null, the depth is 0, if there is only one node: 1
+** note:	This function operates a right rotation on a given node.
+**			The root goes right and down, while the root->left child becomes
+**			new_root. If the root->left had a right child, it gets swaped to
+**			the other side, and becomes the left child of the new_root->right.
 **
-** RETURN:	depth
-**			0 if NULL input.
+**	note:	the rotation is not performed if the root->right child is NULL.
 */
 
-static void	btree_depth_assist(t_btree *node, int *max_depth, int depth)
+void	bstree_right_rotation(t_bstree **root)
 {
-	if (!node)
+	t_bstree *new_root;
+
+	if (!root || !*root || !(*root)->left)
 		return ;
-	if (*max_depth < ++depth)
-		(*max_depth)++;
-	btree_depth_assist(node->left, max_depth, depth);
-	btree_depth_assist(node->right, max_depth, depth);
-}
-
-int			btree_depth(t_btree *root)
-{
-	int max_depth;
-
-	max_depth = 0;
-	btree_depth_assist(root, &max_depth, 0);
-	return (max_depth);
+	new_root = (*root)->left;
+	new_root->parent = (*root)->parent;
+	(*root)->parent = new_root;
+	(*root)->left = new_root->right;
+	if (new_root->right)
+		new_root->right->parent = *root;
+	new_root->right = *root;
+	*root = new_root;
 }

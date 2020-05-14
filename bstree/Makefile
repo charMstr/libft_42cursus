@@ -14,9 +14,9 @@
 ########################## PARAMETERS #########################################
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-NAME = btree.a
+NAME = bstree.a
 .PHONY = clean fclean re all bonus
-FT_H = ./btree.h
+FT_H = ./bstree.h
 OBJ_PATH = ./objects/
 INCLUDE_PATH = ./
 I_FLAGS = -I $(INC_PATH)
@@ -62,7 +62,7 @@ FILES = debug\
 
 FILE_NUMBER=21
 FILE_COUNTER=0
-SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
+SRC = $(patsubst %, $(OBJ_PATH)bstree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
 ###############################################################################
 

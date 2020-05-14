@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_putstr_fd.c                                  :+:      :+:    :+:   */
+/*   bstree_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 14:19:17 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/10 15:26:35 by charmstr         ###   ########.fr       */
+/*   Created: 2019/11/10 18:33:16 by charmstr          #+#    #+#             */
+/*   Updated: 2019/11/14 00:10:30 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note: usefull for error messages: 1 --> stdout		2 --> stderr
+** note:	this function will creat a new node. and place item in it.
 **
-** note2: if fd was not valid, message is redirected to stderr
+** return:	NULL if malloc failed
+**			new node ptr
 */
 
-void	btree_putstr_fd(char *s, int fd)
+t_bstree			*bstree_new(void	*item)
 {
-	int	len;
+	t_bstree	*new;
 
-	if (!s)
-		return ;
-	len = 0;
-	while (s[len])
-		len++;
-	if (write(fd, s, len) == -1)
-		write(2, s, len);
+	if (!(new = (t_bstree*)malloc(sizeof(t_bstree))))
+		return NULL;
+	new->parent = NULL;
+	new->left = NULL;
+	new->right = NULL;
+	new->item = item;
+	return (new);
 }

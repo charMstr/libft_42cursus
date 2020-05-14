@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree.h                                            :+:      :+:    :+:   */
+/*   bstree.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BTREE_H
-# define BTREE_H
+#ifndef BSTREE_H
+# define BSTREE_H
 
 # include <unistd.h>
 # include <stdlib.h>
 
 #define SIZE_LEAF_DEBUG 6
 
-typedef struct	s_btree t_btree;
+typedef struct	s_bstree t_bstree;
 
 /*
 ** note:	structure used by basic binary search tree. see t_rb_node for red/
 **			black trees.
 */
 
-struct			s_btree
+struct			s_bstree
 {
-	t_btree		*parent;
-	t_btree		*left;
-	t_btree		*right;
+	t_bstree		*parent;
+	t_bstree		*left;
+	t_bstree		*right;
 	void		*item;
 };
 
@@ -37,75 +37,75 @@ struct			s_btree
 ** note:	this structure is used for the functions that work on ranges.
 */
 
-typedef struct	s_btree_range
+typedef struct	s_bstree_range
 {
 	void		*item_ref_min;
 	void		*item_ref_max;
-}				t_btree_range;
+}				t_bstree_range;
 
 /*
 ** debug
 */
 
-void			btree_debug(t_btree *root, void (*display)());
-void			btree_putchar_fd(char c, int fd);
-void			btree_putstr_fd(char *s, int fd);
+void			bstree_debug(t_bstree *root, void (*display)());
+void			bstree_putchar_fd(char c, int fd);
+void			bstree_putstr_fd(char *s, int fd);
 
 /*
 ** size
 */
 
-int				btree_size(t_btree *root);
-int				btree_depth(t_btree *root);
+int				bstree_size(t_bstree *root);
+int				bstree_depth(t_bstree *root);
 
 /*
 ** adding
 */
 
-t_btree			*btree_new(void	*item);
-void			btree_add(t_btree **root, t_btree *node, \
+t_bstree			*bstree_new(void	*item);
+void			bstree_add(t_bstree **root, t_bstree *node, \
 			int (*cmp)(void *, void *));
 
 /*
 ** deletion
 */
 
-void			btree_clear(t_btree **root, void (*del)(void*));
-void			btree_del(t_btree **root, void *item_ref, \
+void			bstree_clear(t_bstree **root, void (*del)(void*));
+void			bstree_del(t_bstree **root, void *item_ref, \
 			int (*cmp)(void *, void *), void (*del)(void*));
-void			btree_make_item_uniq(t_btree **root, void *item_ref, \
+void			bstree_make_item_uniq(t_bstree **root, void *item_ref, \
 			int (*cmp)(void *, void *), void (*del)(void*));
-void			btree_make_nodes_uniq(t_btree **root, \
+void			bstree_make_nodes_uniq(t_bstree **root, \
 			int (*cmp)(void *, void *), void (*del)(void *));
 
 /*
 ** rotation
 */
 
-void			btree_left_rotation(t_btree **root);
-void			btree_right_rotation(t_btree **root);
+void			bstree_left_rotation(t_bstree **root);
+void			bstree_right_rotation(t_bstree **root);
 
 /*
 ** searching/getting
 */
 
-void			*btree_find(t_btree *root, void *item_ref, \
+void			*bstree_find(t_bstree *root, void *item_ref, \
 			int (*cmp)(void *, void *));
-t_btree			*btree_getnode(t_btree **root, void *item_ref, \
+t_bstree			*bstree_getnode(t_bstree **root, void *item_ref, \
 			int (*cmp)(void *, void *));
-t_btree			*btree_getnode_range(t_btree **root, t_btree_range *range, \
-			int (*cmp)(void *, void *));
+t_bstree			*bstree_getnode_range(t_bstree **root, \
+			t_bstree_range *range, int (*cmp)(void *, void *));
 
 /*
 ** apply func
 */
 
-int				btree_apply_preorder(t_btree *root, int (*applyf)(void *));
-int				btree_apply_inorder(t_btree *root, int (*applyf)(void *));
-int				btree_apply_postorder(t_btree *root, int (*applyf)(void *));
-int				btree_apply_bfs(t_btree *root, \
+int				bstree_apply_preorder(t_bstree *root, int (*applyf)(void *));
+int				bstree_apply_inorder(t_bstree *root, int (*applyf)(void *));
+int				bstree_apply_postorder(t_bstree *root, int (*applyf)(void *));
+int				bstree_apply_bfs(t_bstree *root, \
 			int (*applyf)(void *item, int current_level, int is_first_elem));
-int				btree_apply_range(t_btree **root, t_btree_range *range, \
+int				bstree_apply_range(t_bstree **root, t_bstree_range *range, \
 			int (*cmp)(void *, void *), int (*applyf)(void *));
 
 #endif

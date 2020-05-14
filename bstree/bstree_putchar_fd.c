@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_putchar_fd.c                                 :+:      :+:    :+:   */
+/*   bstree_putchar_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
 ** note: 1:stdin  2:stderr		do we need to protect fd??
@@ -18,7 +18,7 @@
 ** note2: if fd is not valid, then the write goes to stderr (fd = 2)
 */
 
-void	btree_putchar_fd(char c, int fd)
+void	bstree_putchar_fd(char c, int fd)
 {
 	if (write(fd, &c, 1) == -1)
 		write(2, &c, 1);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_find.c                                       :+:      :+:    :+:   */
+/*   bstree_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
 ** note:	this function will return the adress of the first item within a
@@ -20,8 +20,8 @@
 **			because there is no point.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
-**			It is the exact same cmp function used with btree_del, btree_get(),
-**			btree_add() and btree_find(). and their red_black versions.
+**			It is the exact same cmp function used with bstree_del, bstree_get,
+**			bstree_add() and bstree_find(). and their red_black versions.
 **			It has to handle te case of NULL input, returning 0 if both inputs
 **			are NULL. or > 0  if the new_item , and < 0 if the current
 **			tree_item is NULL so that we keep null at the far right.
@@ -38,7 +38,8 @@
 **				...
 */
 
- void	*btree_find(t_btree *root, void *item_ref, int (*cmp)(void *, void *))
+void	*bstree_find(t_bstree *root, void *item_ref, \
+		int (*cmp)(void *, void *))
 {
 	void	*res;
 
@@ -46,7 +47,7 @@
 		return (NULL);
 	if (!cmp(item_ref, root->item))
 		return (root->item);
-	if (!(res = btree_find(root->left, item_ref, cmp)))
-		res = btree_find(root->right, item_ref, cmp);
+	if (!(res = bstree_find(root->left, item_ref, cmp)))
+		res = bstree_find(root->right, item_ref, cmp);
 	return (res);
 }

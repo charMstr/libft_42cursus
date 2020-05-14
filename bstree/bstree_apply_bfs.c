@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_bfs.c                                  :+:      :+:    :+:   */
+/*   bstree_apply_bfs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 typedef struct	s_apply_bfs
 {
@@ -20,7 +20,7 @@ typedef struct	s_apply_bfs
 	int			bottom;
 }				t_apply_bfs;
 
-static int	btree_apply_bfs2(t_btree *root, t_apply_bfs bfs, \
+static int	bstree_apply_bfs2(t_bstree *root, t_apply_bfs bfs, \
 		int (*applyf)(void *item, int current_level, int is_first_elem));
 
 /*
@@ -40,7 +40,7 @@ static int	btree_apply_bfs2(t_btree *root, t_apply_bfs bfs, \
 **			0 failure in malloc or NULL inputs (including the very root ptr).
 */
 
-int	btree_apply_bfs(t_btree *root, \
+int	bstree_apply_bfs(t_bstree *root, \
 		int (*applyf)(void *item, int current_level, int is_first_elem))
 {
 	int	keep_going;
@@ -60,7 +60,7 @@ int	btree_apply_bfs(t_btree *root, \
 		keep_going = 0;
 		bfs.current_level = -1;
 		is_first_elem = 1;
-		res = btree_apply_bfs2(root, bfs, applyf);
+		res = bstree_apply_bfs2(root, bfs, applyf);
 		if (!*(bfs.keep_going) || !res)
 			break;
 		bfs.bottom++;
@@ -76,7 +76,7 @@ int	btree_apply_bfs(t_btree *root, \
 **			0 KO, some problem occured (malloc failure in applyf).
 */
 
-static int	btree_apply_bfs2(t_btree *root, t_apply_bfs bfs, \
+static int	bstree_apply_bfs2(t_bstree *root, t_apply_bfs bfs, \
 		int (*applyf)(void *item, int current_level, int is_first_elem))
 {
 	int	res;
@@ -92,7 +92,7 @@ static int	btree_apply_bfs2(t_btree *root, t_apply_bfs bfs, \
 			*(bfs.keep_going) = 1;
 		return (res);
 	}
-	if ((res = btree_apply_bfs2(root->left, bfs, applyf)) == 1)
-		res = btree_apply_bfs2(root->right, bfs, applyf);
+	if ((res = bstree_apply_bfs2(root->left, bfs, applyf)) == 1)
+		res = bstree_apply_bfs2(root->right, bfs, applyf);
 	return (res);
 }

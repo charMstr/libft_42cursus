@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_size.c                                       :+:      :+:    :+:   */
+/*   bstree_clear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,34 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "bstree.h"
 
 /*
-** note:	this function will give the total number of nodes in the btree.
+** note:	this function will free the complete bstree from the given root
+**			node thanks to the custom free_func().
 **
-** RETURN:	0 the tree is NULL
-**			1 or more.
+** note:	the del func will have to free the node->item.
 */
 
-static void	btree_size_assist(t_btree *root, int *size);
-
-int			btree_size(t_btree *root)
+void	 bstree_clear(t_bstree **root, void (*del)(void*))
 {
-	int size;
-
-	size = 1;
-	if (!root)
-		return (0);
-	btree_size_assist(root->left, &size);
-	btree_size_assist(root->right, &size);
-	return (size);
-}
-
-static void	btree_size_assist(t_btree *root, int *size)
-{
-	if (!root)
+	if (!root || !*root || !del)
 		return ;
-	(*size)++;
-	btree_size_assist(root->left, size);
-	btree_size_assist(root->right, size);
+	bstree_clear(&(*root)->left, del);
+	bstree_clear(&(*root)->right, del);
+	del((*root)->item);
+	free(*root);
+	*root = NULL;
 }
