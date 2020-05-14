@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_prefix.c                               :+:      :+:    :+:   */
+/*   btree_apply_preorder.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,19 +14,19 @@
 
 /*
 ** note:	this functionn will apply a callback func to every item of a btree.
-**			browsing is prefix first.
+**			browsing is preorder (ROOT, LEFT then RIGHT)
 **
-** RETURN:	1 ok
-**			something failed in the callback function.
+** RETURN:	1 if ok
+**			0 if failure in callback function.
 */
 
-int	btree_apply_prefix(t_btree *root, int (*applyf)(void *))
+int	btree_apply_preorder(t_btree *root, int (*applyf)(void *))
 {
-	if (root && !btree_apply_prefix(root->left, applyf))
-		return (0);
 	if (root && !applyf(root->item))
 		return (0);
-	if (root && !btree_apply_prefix(root->right, applyf))
+	if (root && !btree_apply_preorder(root->left, applyf))
+		return (0);
+	if (root && !btree_apply_preorder(root->right, applyf))
 		return (0);
 	return (1);
 }

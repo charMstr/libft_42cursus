@@ -16,12 +16,11 @@
 ** note:	this functionn will apply a callback func to every item of a tree
 **			node that is superior or equal to item_ref_min, and inferior or
 **			equal to item_ref_max, according to cmp func.
-**			browsing is infix first.
+**			browsing is preorder first. (first root, then left, then right)
 **
-** note:	refer to btree_rb_apply_range() if you want to operate on a
-**			red/black. since we operate only on some part of the tree the nodes
-**			need to be extracted, applied the applyf, the reinjectected. In
-**			order to always respect the cmp func order.
+** note:	Since we operate only on some part of the tree the nodes need to be
+**			extracted, applied the applyf, then reinjectected. In order to
+**			always respect the cmp func order.
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with btree_del,
@@ -64,7 +63,7 @@ int			btree_apply_range(t_btree **root, t_btree_range *range, \
 		btree_add(&subtree, extracted, cmp);
 	if (!subtree)
 		return (1);
-	res = btree_apply_infix(subtree, applyf);
+	res = btree_apply_preorder(subtree, applyf);
 	while (subtree \
 			&& (extracted = btree_getnode(&subtree, subtree->item, cmp)))
 	{

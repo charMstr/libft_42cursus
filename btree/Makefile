@@ -38,42 +38,29 @@ BONUS_FG = \033[38;5;219m
 
 ###############################################################################
 ########################## SOURCE FILES #######################################
-FILES = putchar_fd\
+FILES = debug\
+		putchar_fd\
 		putstr_fd\
+		size\
+		depth\
 		new\
 		add\
-		debug\
-		depth\
-		size\
-		find\
-		getnode\
-		apply_prefix\
-		apply_infix\
-		apply_suffix\
-		apply_bfs\
 		clear\
 		del\
 		make_item_uniq\
 		make_nodes_uniq\
 		left_rotation\
 		right_rotation\
-		rb_new\
-		rb_add\
-		rb_debug\
-		rb_black_height\
-		rb_get_balance\
-		rb_getnode\
-		rb_getnode_range\
-		rb_apply_range\
-		rb_delone\
-		rb_del\
-		rb_del_range\
-		rb_make_item_uniq\
-		rb_make_nodes_uniq\
+		find\
+		getnode\
 		getnode_range\
+		apply_preorder\
+		apply_inorder\
+		apply_postorder\
+		apply_bfs\
 		apply_range\
 
-FILE_NUMBER=34
+FILE_NUMBER=21
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)btree_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

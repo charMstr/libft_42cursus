@@ -100,9 +100,9 @@ t_btree			*btree_getnode_range(t_btree **root, t_btree_range *range, \
 ** apply func
 */
 
-int				btree_apply_prefix(t_btree *root, int (*applyf)(void *));
-int				btree_apply_infix(t_btree *root, int (*applyf)(void *));
-int				btree_apply_suffix(t_btree *root, int (*applyf)(void *));
+int				btree_apply_preorder(t_btree *root, int (*applyf)(void *));
+int				btree_apply_inorder(t_btree *root, int (*applyf)(void *));
+int				btree_apply_postorder(t_btree *root, int (*applyf)(void *));
 int				btree_apply_bfs(t_btree *root, \
 			int (*applyf)(void *item, int current_level, int is_first_elem));
 int				btree_apply_range(t_btree **root, t_btree_range *range, \

@@ -2,7 +2,7 @@
 #include "btree.h"
 #include "libft.h"
 
-int glob = 0;
+int glob = 10;
 
 int	display_func(void	*int_ptr)
 {
@@ -10,8 +10,8 @@ int	display_func(void	*int_ptr)
 	int i;
 	char *str;
 
-	glob++;
-	if (glob == 10)
+	glob--;
+	if (glob == 0)
 	{
 		printf("escape!\n");
 		return (0);
@@ -65,7 +65,6 @@ void	 display_func_debug(void	*int_ptr)
 	free(str);
 }
 
-
 int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 {
 	int		number0 = 0;
@@ -100,12 +99,11 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	node6 = btree_new(&number6);
 	node4->right = node6;
 	node7 = btree_new(&number7);
-	//node6->left = node7;
+	node6->left = node7;
 
 	btree_debug(root, display_func_debug);
-	res = btree_apply_prefix(root, display_func);
-	printf("res is: %d\n", res);
+	res = btree_apply_postorder(root, display_func);
+	printf("res is %d\n", res);
 	printf("depth is %d\n", btree_depth(root));
-	//ok
 	return (0);
 }

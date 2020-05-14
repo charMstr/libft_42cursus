@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_infix.c                                :+:      :+:    :+:   */
+/*   btree_apply_inorder.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,19 +14,19 @@
 
 /*
 ** note:	this functionn will apply a callback func to every item of a btree.
-**			browsing is infix first.
+**			browsing is inorder (first is LEFT, then ROOT, then RIGHT)
 **
-** RETURN:	1 if ok
-**			0 if failure in callback function.
+** RETURN:	1 ok
+**			something failed in the callback function.
 */
 
-int	btree_apply_infix(t_btree *root, int (*applyf)(void *))
+int	btree_apply_inorder(t_btree *root, int (*applyf)(void *))
 {
+	if (root && !btree_apply_inorder(root->left, applyf))
+		return (0);
 	if (root && !applyf(root->item))
 		return (0);
-	if (root && !btree_apply_infix(root->left, applyf))
-		return (0);
-	if (root && !btree_apply_infix(root->right, applyf))
+	if (root && !btree_apply_inorder(root->right, applyf))
 		return (0);
 	return (1);
 }
