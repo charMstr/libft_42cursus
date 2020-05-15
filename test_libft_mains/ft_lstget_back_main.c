@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstpop_main.c                                   :+:      :+:    :+:   */
+/*   ft_lstget_back_main.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,26 +13,12 @@
 #include "libft.h"
 #include <stdio.h>
 
-void	ft_lstpop(t_list **alst)
-{
-	t_list *first;
-
-	if (alst && (*alst))
-	{
-		first = *alst;
-		*alst = (*alst)->next;
-		free(first);
-	}
-}
-
 void	print_listofchar(t_list *head)
 {
-	t_list *tmp;
-	tmp = head;
-	while (tmp)
+	while (head)
 	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
+		printf("%s\n", head->content);
+		head = head->next;
 	}
 }
 
@@ -46,6 +32,7 @@ int	main()
 
 
 	t_list *head;
+	t_list *back;
 
 	ft_lstadd_back(&head, ft_lstnew(str1));
 	ft_lstadd_back(&head, ft_lstnew(str2));
@@ -53,10 +40,30 @@ int	main()
 	ft_lstadd_back(&head, ft_lstnew(str4));
 	ft_lstadd_back(&head, ft_lstnew(str5));
 
+	printf("the linked list contains:\n");
 	print_listofchar(head);
-	ft_lstpop(&head);
+	back = ft_lstget_back(&head);
 	printf("\n");
+	printf("now that we poped the back the linked list contains:\n");
 	print_listofchar(head);
+	printf("the poped link contains:\n");
+	print_listofchar(back);
+
+	printf("\n\n\033[34mdoing it it until we poped nothing:\033[0m\n");
+	while (head)
+	{
+		printf("now that we poped the back the linked list contains:\n");
+		print_listofchar(head);
+		back = ft_lstget_back(&head);
+		printf("the poped link contains:\n");
+		print_listofchar(back);
+	}
+	printf("\n\n\033[34mwhen done:\033[0m\n");
+	printf("now that we poped the back the linked list contains:\n");
+	print_listofchar(head);
+	printf("the poped link contains:\n");
+	print_listofchar(back);
 
 	return (0);
 }
+

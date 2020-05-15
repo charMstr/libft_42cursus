@@ -53,35 +53,35 @@ int	main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 	new = ft_lstnew(str);
 	ft_lstadd_cmp(&head, new, ft_strcmp);
 	print_list(head);
-	new = ft_lstget(&head, "2 hey", ft_strcmp);
+	new = ft_lstget_cmp(&head, "2 hey", ft_strcmp);
 	if (new)
 		printf("new->content = [%s]\n", new->content);
 	else
 		printf("new->content = [%s]\n", NULL);
 	ft_lstdelone(new, free);
 	print_list(head);
-	new = ft_lstget(&head, "2 hey", ft_strcmp);
+	new = ft_lstget_cmp(&head, "2 hey", ft_strcmp);
 	if (new)
 		printf("new->content = [%s]\n", new->content);
 	else
 		printf("new->content = [%s]\n", NULL);
 	ft_lstdelone(new, free);
 	print_list(head);
-	new = ft_lstget(&head, "2 hey", ft_strcmp);
+	new = ft_lstget_cmp(&head, "2 hey", ft_strcmp);
 	if (new)
 		printf("new->content = [%s]\n", new->content);
 	else
 		printf("new->content = [%s]\n", NULL);
 	ft_lstdelone(new, free);
 	print_list(head);
-	new = ft_lstget(&head, "4 hey", ft_strcmp);
+	new = ft_lstget_cmp(&head, "4 hey", ft_strcmp);
 	if (new)
 		printf("new->content = [%s]\n", new->content);
 	else
 		printf("new->content = [%s]\n", NULL);
 	ft_lstdelone(new, free);
 	print_list(head);
-	new = ft_lstget(&head, "4 hey", ft_strcmp);
+	new = ft_lstget_cmp(&head, "4 hey", ft_strcmp);
 	if (new)
 		printf("new->content = [%s]\n", new->content);
 	else

@@ -111,6 +111,9 @@ FILES += lstnew\
 	lstadd_front\
 	lstadd_back\
 	lstadd_cmp\
+	lstget_front\
+	lstget_back\
+	lstget_cmp\
 	lstdel_front\
 	lstdel_back\
 	lstdel_cmp\
@@ -123,7 +126,6 @@ FILES += lstnew\
 	lstsize\
 	lstlast\
 	lstfind\
-	lstget\
 	lstrev\
 	lstsort\
 	lstmerge\
@@ -141,7 +143,7 @@ FILES += dlstnew\
 	dlstdel_back\
 	dlstdel_front\
 
-FILE_NUMBER=85
+FILE_NUMBER=87
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstget.c                                        :+:      :+:    :+:   */
+/*   ft_lstget_cmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   by: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@
 ** return:	null if not found.
 */
 
-t_list *ft_lstget(t_list **alst, void *content_ref, int (*cmp)())
+t_list *ft_lstget_cmp(t_list **alst, void *content_ref, int (*cmp)())
 {
 	t_list *extract;
 
