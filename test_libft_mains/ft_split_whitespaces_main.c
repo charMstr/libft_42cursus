@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_whitespaces.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,26 +25,27 @@
 int	main(int argc, char *argv[])
 {
 	char *string;
+	char *ifs;
 	char **ptr;
 	int i;
-	char c;
 
 	if (argc != 3)
 	{
-		printf("failed to povide 2 arg: string to be split, and separator char\n");
+		printf("failed to povide 2 arg: string to be split, and separator str\n");
 		return (0);
 	}
 	string = argv[1];
-	c = argv[2][0];
+	ifs = argv[2];
 
 	printf("assertions for null inputs...ok\n");
-	assert(ft_split(NULL, c) == NULL);
+	assert(ft_split_whitespaces(NULL, ifs) == NULL);
+	assert(ft_split_whitespaces(string, NULL) == NULL);
 
 	i = 0;
 	printf("original string: [%s]\n",string);
-	printf("ans splitting char: [%c]\n", c);
+	printf("ans splitting ifs string: [%s]\n", ifs);
 	printf("\n");
-	ptr = ft_split(string, c);
+	ptr = ft_split_whitespaces(string, ifs);
 	while (ptr[i])
 	{
 		printf("[%s]\n", ptr[i]);

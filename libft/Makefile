@@ -97,6 +97,7 @@ FILES += strdup\
 	strmapi\
 	stringify\
 	split\
+	split_whitespaces\
 
 # char** manipulation
 FILES += array_dup\
@@ -143,7 +144,7 @@ FILES += dlstnew\
 	dlstdel_back\
 	dlstdel_front\
 
-FILE_NUMBER=87
+FILE_NUMBER=88
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)

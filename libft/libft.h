@@ -85,6 +85,7 @@ char				*ft_itoa_base(int number, int base);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_stringify(char *line);
 char				**ft_split(char const *s, char c);
+char				**ft_split_whitespaces(char const *s, char *ifs);
 
 char				**ft_array_dup(char **array);
 void				*ft_array_free(char ***ptr, int k);

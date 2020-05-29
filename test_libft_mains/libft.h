@@ -85,6 +85,7 @@ char				*ft_itoa_base(int number, int base);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_stringify(char *line);
 char				**ft_split(char const *s, char c);
+char				**ft_split_whitespaces(char const *s, char *ifs);
 
 char				**ft_array_dup(char **array);
 void				*ft_array_free(char ***ptr, int k);
@@ -99,6 +100,7 @@ void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstadd_cmp(t_list **alst, t_list *new, int (*cmp)());
 t_list				*ft_lstget_front(t_list **alst);
 t_list				*ft_lstget_back(t_list **alst);
+t_list				*ft_lstget_cmp(t_list **alst, void *content_ref, int (*cmp)());
 void				ft_lstdel_front(t_list **alst, void	(*del)(void *));
 void				ft_lstdel_back(t_list **alst, void	(*del)(void *));
 void				ft_lstdel_cmp(t_list **alst, void *data_ref, int (*cmp)(),\
@@ -115,7 +117,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstfind(t_list *alst, void *content_ref, int (*cmp)());
-t_list				*ft_lstget(t_list **alst, void *content_ref, int (*cmp)());
 t_list				*ft_lstrev(t_list *lst);
 void				ft_lstsort(t_list **alst, int (*cmp)());
 void				ft_lstmerge(t_list **alst1, t_list *lst2, int (*cmp)());

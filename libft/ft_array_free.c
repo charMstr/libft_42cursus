@@ -19,7 +19,7 @@
 **			- k:	the index from wich to start decreasing.
 **					or simply ft_array_len().
 **
-** exemple:	ft_array_free(&array, ft_array_len((const char*)array));
+** exemple:	ft_array_free(&array, ft_array_len((const char**)array));
 **
 ** RETURN:	NULL for context convenience
 */
