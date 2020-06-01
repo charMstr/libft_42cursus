@@ -66,6 +66,7 @@ FILES += isalnum\
 	isascii\
 	isdigit\
 	isprint\
+	isonly\
 	tolower\
 	toupper\
 
@@ -145,7 +146,7 @@ FILES += dlstnew\
 	dlstdel_back\
 	dlstdel_front\
 
-FILE_NUMBER=89
+FILE_NUMBER=90
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
