@@ -61,6 +61,7 @@ int					ft_tolower(int c);
 size_t				ft_strlen(const char *s);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_str_star_cmp(char *str, char *star);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strichr(const char *str, char c);

@@ -73,6 +73,7 @@ FILES += isalnum\
 FILES += strlen\
 	strcmp\
 	strncmp\
+	strcmp_star\
 	strchr\
 	strrchr\
 	strichr\
@@ -144,7 +145,7 @@ FILES += dlstnew\
 	dlstdel_back\
 	dlstdel_front\
 
-FILE_NUMBER=88
+FILE_NUMBER=89
 FILE_COUNTER=0
 SRC = $(patsubst %, $(OBJ_PATH)ft_%.c, $(FILES))
 OBJ = $(SRC:.c=.o)
