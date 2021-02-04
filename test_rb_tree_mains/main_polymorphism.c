@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "btree.h"
+#include "bstree.h"
+#include "rb_tree.h"
 #include "libft.h"
 
 /*
@@ -229,7 +230,7 @@ t_rb_node *creat_node_with_item(e_type type, char *str, int num)
 	item = creat_item(type, str, num);
 	if (!item)
 		return (NULL);
-	return(btree_rb_new(item));
+	return(rb_tree_new(item));
 }
 
 int	creat_item_and_node_and_add(t_rb_node **root, e_type type, char *str, \
@@ -239,7 +240,7 @@ int	creat_item_and_node_and_add(t_rb_node **root, e_type type, char *str, \
 
 	if (!(new_node = creat_node_with_item(type, str, num)))
 		return (0);
-	btree_rb_add(root, new_node, cmp);
+	rb_tree_add(root, new_node, cmp);
 	return (1);
 }
 
@@ -352,38 +353,52 @@ int	main_assist(void)
 		return (0);
 
 	printf("root contains:\n");
-	btree_rb_debug(root, display_func);
+	rb_tree_debug(root, display_func);
 
 	printf("after making all nodes->item uniq, root contains:\n");
-	btree_rb_make_nodes_uniq(&root, cmp_func, free_func);
-	btree_rb_debug(root, display_func);
+	rb_tree_make_nodes_uniq(&root, cmp_func, free_func);
+	rb_tree_debug(root, display_func);
 
 	void *item_ref2;
 
 	printf("searching for the green it containing 102:\n");
 	item_ref.type = INT2;
 	item_ref.num = 102;
-	if ((item_ref2 = btree_find((t_btree*)root, (void *)&item_ref, cmp_func)))
+	if ((item_ref2 = bstree_find((t_bstree*)root, (void *)&item_ref, cmp_func)))
 	{
 		printf("item_ref was found!\n");
 		display_func(item_ref2);
 	}
 
+	//creating a range structure.
+	t_rb_tree_range range;
+	range.item_ref_min = &item_ref;
+	range.item_ref_max = &item_ref2;
+
 	item_ref.type = RM_INT;
-	printf("\n\nbuilding a subtree containing only the cyan ints:\n");
-	subtree = btree_rb_subtree(&root, &item_ref, &item_ref, cmp_func);
-	btree_rb_debug(subtree, display_func);
+	printf("\n\nbuilding a subtree, extracting only the cyan nodes (ints) from the tree:\n");
+	while ((node = rb_tree_getnode_range(&root, &range, cmp_func)))
+	{
+		rb_tree_add(&subtree, node, cmp_func);
+	}
+	rb_tree_debug(subtree, display_func);
 
 	item_ref.type = RM_STR;
-	printf("building a subtree containing only the purple strings:\n");
-	subtree2 = btree_rb_subtree(&root, &item_ref, &item_ref, cmp_func);
-	btree_rb_debug(subtree2, display_func);
+	printf("building a subtree, extracting only the purple nodes (strings) from the tree:\n");
+	while ((node = rb_tree_getnode_range(&root, &range, cmp_func)))
+	{
+		rb_tree_add(&subtree2, node, cmp_func);
+	}
+	rb_tree_debug(subtree2, display_func);
 
 	printf("now the root contains whatever is left:\n");
-	btree_rb_debug(root, display_func);
-	btree_clear((t_btree**)&root, free_func);
-	btree_clear((t_btree**)&subtree, free_func);
-	btree_clear((t_btree**)&subtree2, free_func);
+	rb_tree_debug(root, display_func);
+
+
+	//cleaning memory
+	bstree_clear((t_bstree**)&root, free_func);
+	bstree_clear((t_bstree**)&subtree, free_func);
+	bstree_clear((t_bstree**)&subtree2, free_func);
 	return (0);
 }
 
