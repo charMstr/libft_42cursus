@@ -6,7 +6,7 @@
 /*   By: charmstr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 18:33:16 by charmstr          #+#    #+#             */
-/*   Updated: 2019/11/14 00:10:30 by charmstr         ###   ########.fr       */
+/*   Updated: 2021/06/09 20:59:16 by charmstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	rb_tree_add_balance_parent_is_right_child(t_rb_node **root, \
 **			The insertion's position is decided with the cmp function. For each
 **			node, if cmp returns a negative value go left, if >= 0 go right.
 **
-** note:	node is a new node previously malloced w/ tb_tree_new().
+** note:	node is a new node previously malloced w/ rb_tree_new().
 **
 ** note:	Cumstom function cmp has a similar behavior to ft_strcmp().
 **			It is the exact same cmp function used with rb_tree_del,
