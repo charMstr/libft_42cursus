@@ -1,9 +1,12 @@
-#RB_TREE library test:
+# RB_TREE library test:
 
 ## introduction:
 To get an example of the power of this library, i created an example of a
 red black tree that contains elements of different types. Use the program in
 main_polymorphism.c to have a visual of the example.
+![](https://github.com/charMstr/libft_42cursus/blob/master/test_rb_tree_mains/rb_tree_example.png)
+
+![](https://github.com/charMstr/libft_42cursus/blob/master/test_rb_tree_mains/rb_tree_example_zoom.png)
 
 compile it, then execute it (unzoom screen enough to see the clouds of colour
 distincly).
