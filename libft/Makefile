@@ -6,7 +6,7 @@
 #    By: charmstr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/11 21:40:12 by charmstr          #+#    #+#              #
-#    Updated: 2020/01/30 16:04:00 by charmstr         ###   ########.fr        #
+#    Updated: 2021/06/27 18:58:39 by charmstr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,7 +163,7 @@ $(OBJ_PATH):
 
 $(NAME): $(OBJ)
 	@ar -src $@ $(OBJ)
-	@echo "\n\t\t$(CREAT_FG)Library $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CREAT_FG) has been created.$(CLEAR_COLOR)\n"
+	@echo "\n\t\t$(CREAT_FG)Static Library $(NAME_BG)$(BLACK_FG) $@ $(BLACK_BG)$(CREAT_FG) has been created$(CLEAR_COLOR)\n"
 
 $(OBJ): $(OBJ_PATH)%.o: %.c $(FT_H) | $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
@@ -171,7 +171,7 @@ $(OBJ): $(OBJ_PATH)%.o: %.c $(FT_H) | $(OBJ_PATH)
 	@echo " $(COUNTER_FG)[$(FILE_COUNTER)/$(FILE_NUMBER)] $(CREAT_FG)>>......... $@$(CLEAR_COLOR)"
 
 clean:
-	@echo "\t\t$(REMOVE_FG)deleting $(OBJECTS_BG)$(BLACK_FG)$(OBJ_PATH) $(BLACK_BG)$(REMOVE_FG) containing all the .o files for $(NAME_BG)$(BLACK_FG)$(NAME) $(BLACK_BG)$(CLEAR_COLOR)"
+	@echo "\t\t$(REMOVE_FG)deleting $(OBJECTS_BG)$(BLACK_FG) $(OBJ_PATH) $(BLACK_BG)$(REMOVE_FG) containing all the .o files for $(NAME_BG)$(BLACK_FG) $(NAME) $(CLEAR_COLOR)"
 	@rm -rf $(OBJ_PATH)
 
 fclean: clean
